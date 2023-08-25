@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_trening_menu"
+            android:icon="@drawable/menu_znak"
+            android:title="Treningi"
+            android:onClick="onOptionsItemSelected"/>
+        <item
+            android:id="@+id/nav_newsy"
+            android:icon="@drawable/menu_znak"
+            android:title="Newsy"
+            android:onClick="onOptionsItemSelected"/>
+        <item
+            android:id="@+id/nav_boiska"
+            android:icon="@drawable/menu_znak"
+            android:title="Boiska"
+            android:onClick="onOptionsItemSelected"/>
+        <item
+            android:id="@+id/nav_notatnik"
+            android:icon="@drawable/menu_znak"
+            android:title="Notatnik"
+            android:onClick="onOptionsItemSelected"/>
+        <item
+            android:id="@+id/nav_gry"
+            android:icon="@drawable/menu_znak"
+            android:title="Gry treningowe" />
+        <item
+            android:id="@+id/nav_ustawienia"
+            android:icon="@drawable/menu_znak"
+            android:title="Ustawienia" />
+    </group>
+</menu>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.first_mgr.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/activity_menu" >
+        <action
+            android:id="@+id/action_nav_home_to_nav_treningi"
+            app:destination="@id/nav_trening_menu" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_newsy"
+            app:destination="@id/nav_newsy" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_notatnik"
+            app:destination="@id/nav_notatnik" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_newsy"
+        android:name="com.example.first_mgr.newsy_activity"
+        android:label="newsy"
+        tools:layout="@layout/activity_games_list" />
+
+    <fragment
+        android:id="@+id/nav_trening_menu"
+        android:name="com.example.first_mgr.trening_menu"
+        android:label="treningi"
+        tools:layout="@layout/activity_trening_menu" />
+    <fragment
+        android:id="@+id/nav_notatnik"
+        android:name="com.example.first_mgr.NotatnikActivity"
+        android:label="Notatnik"
+        tools:layout="@layout/activity_notatnik" />
+</navigation>
