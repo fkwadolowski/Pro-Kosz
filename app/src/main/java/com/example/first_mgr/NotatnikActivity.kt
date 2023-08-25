@@ -1,5 +1,6 @@
 package com.example.first_mgr
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -50,7 +51,6 @@ class NotatnikActivity : ComponentActivity() {
                 BasketCounterScreen(exerciseStatsDao)
                 Spacer(modifier = Modifier.height(16.dp))
                 DisplayExerciseStats(exerciseStatsDao)
-                Demo_ExposedDropdownMenuBox()
             }
         }
     }
@@ -64,6 +64,7 @@ class NotatnikActivity : ComponentActivity() {
         var isSaveButtonClicked by remember { mutableStateOf(false) }
         var exerciseStatsList by remember { mutableStateOf(emptyList<ExerciseStatistics>()) }
         var selectedExerciseName by remember { mutableStateOf(preconfiguredNames[0]) }
+        var selectedText by remember { mutableStateOf(preconfiguredNames[0]) }
 
 
         Column(
@@ -91,7 +92,9 @@ class NotatnikActivity : ComponentActivity() {
             }
 
             Spacer(modifier = Modifier.height(16.dp))
-            Demo_ExposedDropdownMenuBox()
+            Demo_ExposedDropdownMenuBox(selectedText) { selectedValue ->
+                selectedExerciseName = selectedValue
+            }
             // Dropdown to select exercise name
 //            DropdownMenu(
 //                expanded = selectedExerciseName.isNotEmpty(),
@@ -111,10 +114,15 @@ class NotatnikActivity : ComponentActivity() {
 
             if (isSaveButtonClicked) {
                 val exerciseStats = ExerciseStatistics(
-                    exerciseName = selectedExerciseName, // Use the selected exercise name
+                    exerciseName = selectedExerciseName,
                     basketsMade = basketsMade,
                     basketShots = basketShots,
-                    timestamp = System.currentTimeMillis())
+                    timestamp = System.currentTimeMillis()
+                )
+                saveExerciseStats(exerciseStatsDao, exerciseStats)
+                basketsMade = 0
+                basketShots = 0
+                isSaveButtonClicked = false
             } else {
                 Button(onClick = {
                     isSaveButtonClicked = true
@@ -138,9 +146,16 @@ class NotatnikActivity : ComponentActivity() {
             }) {
                 Text(text = "Print Statistics")
             }
+            Spacer(modifier = Modifier.height(16.dp))
+            Button(onClick = {
+                // Start the new activity
+                val intent = Intent(this@NotatnikActivity, SavedProgressActivity::class.java)
+                startActivity(intent)
+            }) {
+                Text(text = "View Statistics")
+            }
         }
     }
-
 
     @Composable
     fun saveExerciseStats(exerciseStatsDao: ExerciseStatsDao, exerciseStats: ExerciseStatistics) {
@@ -201,11 +216,14 @@ class NotatnikActivity : ComponentActivity() {
 }
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Demo_ExposedDropdownMenuBox() {
+fun Demo_ExposedDropdownMenuBox(
+    // Define the variable `selectedText` in the scope of the function
+    selectedText: String,
+    onSelectedTextChange: (String) -> Unit
+) {
     val context = LocalContext.current
-    val coffeeDrinks = arrayOf("Americano", "Cappuccino", "Espresso", "Latte", "Mocha")
+    val coffeeDrinks = arrayOf("dystans", "pół-dystans", "trumna", "dwutakty")
     var expanded by remember { mutableStateOf(false) }
-    var selectedText by remember { mutableStateOf(coffeeDrinks[0]) }
 
     Box(
         modifier = Modifier
@@ -215,7 +233,7 @@ fun Demo_ExposedDropdownMenuBox() {
         ExposedDropdownMenuBox(
             expanded = expanded,
             onExpandedChange = {
-                expanded = !expanded
+                expanded = it
             }
         ) {
             TextField(
@@ -234,7 +252,7 @@ fun Demo_ExposedDropdownMenuBox() {
                     DropdownMenuItem(
                         text = { Text(text = item) },
                         onClick = {
-                            selectedText = item
+                            onSelectedTextChange(item) // Update the selected text
                             expanded = false
                             Toast.makeText(context, item, Toast.LENGTH_SHORT).show()
                         }
