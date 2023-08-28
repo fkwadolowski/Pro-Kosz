@@ -2,7 +2,6 @@ package com.example.first_mgr
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -32,7 +31,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.example.first_mgr.Constants.preconfiguredNames
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 
@@ -51,11 +52,12 @@ class NotatnikActivity : ComponentActivity() {
                 BasketCounterScreen(exerciseStatsDao)
                 Spacer(modifier = Modifier.height(16.dp))
                 DisplayExerciseStats(exerciseStatsDao)
+
+
             }
         }
     }
 
-    // ...
 
     @Composable
     fun BasketCounterScreen(exerciseStatsDao: ExerciseStatsDao) {
@@ -119,7 +121,7 @@ class NotatnikActivity : ComponentActivity() {
                     basketShots = basketShots,
                     timestamp = System.currentTimeMillis()
                 )
-                saveExerciseStats(exerciseStatsDao, exerciseStats)
+                SaveExerciseStats(exerciseStatsDao, exerciseStats)
                 basketsMade = 0
                 basketShots = 0
                 isSaveButtonClicked = false
@@ -132,20 +134,7 @@ class NotatnikActivity : ComponentActivity() {
             }
 
             Spacer(modifier = Modifier.height(16.dp))
-
-            // Button to print the exercise statistics
-            Button(onClick = {
-                exerciseStatsList.forEach { stats ->
-                    println(
-                        "Exercise: ${stats.exerciseName}\n" +
-                                "Baskets Made: ${stats.basketsMade}\n" +
-                                "Basket Shots: ${stats.basketShots}\n" +
-                                "Timestamp: ${stats.timestamp}"
-                    )
-                }
-            }) {
-                Text(text = "Print Statistics")
-            }
+            ClearDatabase(exerciseStatsDao)
             Spacer(modifier = Modifier.height(16.dp))
             Button(onClick = {
                 // Start the new activity
@@ -158,7 +147,7 @@ class NotatnikActivity : ComponentActivity() {
     }
 
     @Composable
-    fun saveExerciseStats(exerciseStatsDao: ExerciseStatsDao, exerciseStats: ExerciseStatistics) {
+    fun SaveExerciseStats(exerciseStatsDao: ExerciseStatsDao, exerciseStats: ExerciseStatistics) {
         LaunchedEffect(exerciseStats) {
             withContext(Dispatchers.IO) {
                 exerciseStatsDao.insert(exerciseStats)
@@ -198,65 +187,76 @@ class NotatnikActivity : ComponentActivity() {
                 Spacer(modifier = Modifier.height(16.dp))
             }
 
-            // Add a button to print the exercise statistics
-            Button(onClick = {
-                exerciseStatsList.forEach { stats ->
-                    Log.d("Print Statistics",
-                        "Exercise: ${stats.exerciseName}\n" +
-                                "Baskets Made: ${stats.basketsMade}\n" +
-                                "Basket Shots: ${stats.basketShots}\n" +
-                                "Timestamp: ${stats.timestamp}"
-                    )
-                }
-            }) {
-                Text(text = "Print Statistics")
-            }
         }
     }
-}
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun Demo_ExposedDropdownMenuBox(
-    // Define the variable `selectedText` in the scope of the function
-    selectedText: String,
-    onSelectedTextChange: (String) -> Unit
-) {
-    val context = LocalContext.current
-    val coffeeDrinks = arrayOf("dystans", "pół-dystans", "trumna", "dwutakty")
-    var expanded by remember { mutableStateOf(false) }
 
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(32.dp)
-    ) {
-        ExposedDropdownMenuBox(
-            expanded = expanded,
-            onExpandedChange = {
-                expanded = it
+
+    @Composable
+    fun ClearDatabase(exerciseStatsDao: ExerciseStatsDao) {
+        val context = LocalContext.current
+
+        val clearDatabase = remember {
+            // This is a suspending function, so we need to use a `remember`
+            // function to suspend the execution of this Composable function
+            suspend {
+                exerciseStatsDao.clearAll()
             }
-        ) {
-            TextField(
-                value = selectedText,
-                onValueChange = {},
-                readOnly = true,
-                trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
-                modifier = Modifier.menuAnchor()
-            )
+        }
 
-            ExposedDropdownMenu(
+        Button(onClick = {
+            CoroutineScope(Dispatchers.IO).launch {
+                clearDatabase()
+                // Optionally, you can update any necessary state here
+            }
+        }) {
+            Text(text = "Clear Database")
+        }
+    }
+
+    @OptIn(ExperimentalMaterial3Api::class)
+    @Composable
+    fun Demo_ExposedDropdownMenuBox(
+        // Define the variable `selectedText` in the scope of the function
+        selectedText: String,
+        onSelectedTextChange: (String) -> Unit
+    ) {
+        val context = LocalContext.current
+        val coffeeDrinks = arrayOf("dystans", "pół-dystans", "trumna", "dwutakty")
+        var expanded by remember { mutableStateOf(false) }
+
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(32.dp)
+        ) {
+            ExposedDropdownMenuBox(
                 expanded = expanded,
-                onDismissRequest = { expanded = false }
+                onExpandedChange = {
+                    expanded = it
+                }
             ) {
-                coffeeDrinks.forEach { item ->
-                    DropdownMenuItem(
-                        text = { Text(text = item) },
-                        onClick = {
-                            onSelectedTextChange(item) // Update the selected text
-                            expanded = false
-                            Toast.makeText(context, item, Toast.LENGTH_SHORT).show()
-                        }
-                    )
+                TextField(
+                    value = selectedText,
+                    onValueChange = {},
+                    readOnly = true,
+                    trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
+                    modifier = Modifier.menuAnchor()
+                )
+
+                ExposedDropdownMenu(
+                    expanded = expanded,
+                    onDismissRequest = { expanded = false }
+                ) {
+                    coffeeDrinks.forEach { item ->
+                        DropdownMenuItem(
+                            text = { Text(text = item) },
+                            onClick = {
+                                onSelectedTextChange(item) // Update the selected text
+                                expanded = false
+                                Toast.makeText(context, item, Toast.LENGTH_SHORT).show()
+                            }
+                        )
+                    }
                 }
             }
         }

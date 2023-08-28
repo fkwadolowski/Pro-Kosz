@@ -19,6 +19,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class SavedProgressActivity : ComponentActivity() {
 
@@ -40,7 +43,8 @@ class SavedProgressActivity : ComponentActivity() {
 
             LazyColumn(
                 modifier = Modifier.fillMaxSize(),
-                verticalArrangement = Arrangement.spacedBy(8.dp)
+                verticalArrangement = Arrangement.Top
+
             ) {
                 item {
                     Row(
@@ -49,10 +53,10 @@ class SavedProgressActivity : ComponentActivity() {
                             .padding(16.dp),
                         horizontalArrangement = Arrangement.SpaceEvenly
                     ) {
-                        Text("Timestamp")
-                        Text("Exercise Name")
-                        Text("Baskets Made")
-                        Text("Basket Shots")
+                        Text("Data")
+                        Text("Nazwa ćwiczenia")
+                        Text("Skuteczność")
+
 
                     }
                 }
@@ -64,14 +68,17 @@ class SavedProgressActivity : ComponentActivity() {
                             .padding(4.dp),
                         horizontalArrangement = Arrangement.SpaceEvenly
                     ) {
-                        Text(stats.timestamp.toString())
+                        Text(formatTimestamp(stats.timestamp))
                         Text(stats.exerciseName)
-                        Text(stats.basketsMade.toString())
-                        Text(stats.basketShots.toString())
-
+                        Text("${stats.basketsMade}/${stats.basketShots}")
+                        Text("")
                     }
                 }
             }
         }
     }
+}
+private fun formatTimestamp(timestamp: Long): String {
+    val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
+    return dateFormat.format(Date(timestamp))
 }
