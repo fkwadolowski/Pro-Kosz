@@ -42,8 +42,11 @@ class NotatnikActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         DatabaseManager.initialize(applicationContext)
+
         setContent {
             val exerciseStatsDao = DatabaseManager.getExerciseStatisticsDao()
+
+
             Column(
                 modifier = Modifier.fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally,

@@ -29,6 +29,7 @@ abstract class ExerciseStatsDao {
     abstract  fun getAllExerciseStats(): List<ExerciseStatistics>
     @Query("DELETE FROM exercise_statistics")
     abstract fun clearAll()
+
 }
 
 
