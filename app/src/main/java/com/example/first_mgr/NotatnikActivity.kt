@@ -72,6 +72,7 @@ class NotatnikActivity : ComponentActivity() {
         var selectedText by remember { mutableStateOf(preconfiguredNames[0]) }
 
 
+
         Column(
             modifier = Modifier
                 .fillMaxSize()
