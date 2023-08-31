@@ -54,14 +54,14 @@ class SavedProgressActivity : ComponentActivity() {
             val groupedStats = exerciseStatsList.groupBy { formatTimestamp(it.timestamp) }
             val xAxisLabelsGrouped = groupedStats.keys.toList()
             val aggregatedBarValues = mutableListOf<List<Float>>()
+            val allBarValues = mutableListOf<Float>()
             groupedStats.values.forEach { statsForDay ->
-                val basketsMadeValues = statsForDay.map { it.basketsMade.toFloat() }
-                val basketShotsValues = statsForDay.map { it.basketShots.toFloat() }
-                val barValuesForDay = basketsMadeValues.zip(basketShotsValues).map { (basketsMade, basketShots) ->
-                    if (basketShots != 0f) basketsMade / basketShots else 0f
-                }
-                aggregatedBarValues.add(barValuesForDay)
+                val basketsMadeSum = statsForDay.sumOf { it.basketsMade }
+                val basketShotsSum = statsForDay.sumOf { it.basketShots }
+                val averageBarValue = basketsMadeSum.toFloat() / basketShotsSum.toFloat()
+                allBarValues.add(averageBarValue) // Add the value to the single list
             }
+
             Log.d("AggregatedBarValues", aggregatedBarValues.toString())
             Log.d("xAxisLabelsGrouped", xAxisLabelsGrouped.toString())
             // Fetch the exercise statistics from the database
@@ -75,7 +75,7 @@ class SavedProgressActivity : ComponentActivity() {
             val xAxisLabels = exerciseStatsList.map { formatTimestamp(it.timestamp) }
             val barValues =
                 exerciseStatsList.map { it.basketsMade.toFloat() / it.basketShots.toFloat() }
-            val adjustedBarValues = barValues.map { if (it == 1.0f) 0.99f else it }
+            val adjustedBarValues = barValues.map { if (it == 1.0f) 0.92f else it }
             Column(
                 modifier = Modifier.fillMaxSize()
                     .verticalScroll(rememberScrollState())
@@ -110,25 +110,27 @@ class SavedProgressActivity : ComponentActivity() {
                         }
                     }
                 }
-            }
-            // Third part: Another component
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp)
-            ) {
-                // Your third component's content goes here
-                Spacer(modifier = Modifier.height(150.dp))
-                Text(text = "Third Component")
 
-                for ((index, barValues) in aggregatedBarValues.withIndex()) {
-                    if (index < xAxisLabelsGrouped.size) { // Check index bounds
-                        CustomChart(barValues,xAxisLabelsGrouped, 100)
+                // Third part: Another component
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp)
+                ) {
+                    // Your third component's content goes here
+                    Spacer(modifier = Modifier.height(150.dp))
+                    Text(text = "Third Component")
+
+                    if (allBarValues.isNotEmpty()) {
+                        Log.d("CustomChart", "Creating chart for all days")
+                        Log.d("CustomChart", "Values: $allBarValues")
+                        CustomChart(allBarValues, xAxisLabelsGrouped, 100)
                         Spacer(modifier = Modifier.height(16.dp)) // Adds vertical spacing between components
                     }
                 }
             }
-            //4 part
+
+                //4 part
 //            Spacer(modifier = Modifier.height(150.dp))
 //            Column(
 //                modifier = Modifier
@@ -139,9 +141,8 @@ class SavedProgressActivity : ComponentActivity() {
 //                    CustomChart2(exerciseStatsList, 100)
 //                    Spacer(modifier = Modifier.height(16.dp)) // Adds vertical spacing between components
 //                }                }
+            }
         }
-    }
-
 
     private fun formatTimestamp(timestamp: Long): String {
         val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
@@ -206,6 +207,7 @@ class SavedProgressActivity : ComponentActivity() {
                         .fillMaxHeight()
                         .width(scaleLineWidth)
                         .background(Color.Black)
+
                 )
                 // graph and X-axis labels
                 barValues.forEachIndexed { index, value ->
@@ -234,9 +236,9 @@ class SavedProgressActivity : ComponentActivity() {
                                 }
                         )
 
-                        // X-axis label using index to retrieve the corresponding date
+                        // X-axis label using the date label from xAxisScale
                         Text(
-                            text = xAxisScale.getOrNull(index) ?: "",
+                            text = xAxisScale[index],
                             textAlign = TextAlign.Center
                         )
                     }
@@ -245,93 +247,94 @@ class SavedProgressActivity : ComponentActivity() {
         }
     }
 
-    @Composable
-    fun CustomChart2(
-        exerciseStatsList: List<ExerciseStatistics>,
-        total_amount: Int
-    ) {
-        // BarGraph Dimensions
-        val barGraphHeight by remember { mutableStateOf(200.dp) }
-        val barGraphWidth by remember { mutableStateOf(20.dp) }
-        // Scale Dimensions
-        val scaleYAxisWidth by remember { mutableStateOf(50.dp) }
-        val scaleLineWidth by remember { mutableStateOf(2.dp) }
+//    @Composable
+//    fun CustomChart2(
+//        exerciseStatsList: List<ExerciseStatistics>,
+//        total_amount: Int
+//    ) {
+//        // BarGraph Dimensions
+//        val barGraphHeight by remember { mutableStateOf(200.dp) }
+//        val barGraphWidth by remember { mutableStateOf(20.dp) }
+//        // Scale Dimensions
+//        val scaleYAxisWidth by remember { mutableStateOf(50.dp) }
+//        val scaleLineWidth by remember { mutableStateOf(2.dp) }
+//
+//        Column(
+//            modifier = Modifier
+//                .padding(50.dp)
+//                .fillMaxSize(),
+//            verticalArrangement = Arrangement.Top
+//        ) {
+//            Row(
+//                modifier = Modifier
+//                    .height(barGraphHeight)
+//                    .fillMaxWidth(),
+//                verticalAlignment = Alignment.Bottom,
+//                horizontalArrangement = Arrangement.Start
+//            ) {
+//                // scale Y-Axis
+//                Box(
+//                    modifier = Modifier
+//                        .fillMaxHeight()
+//                        .width(scaleYAxisWidth),
+//                    contentAlignment = Alignment.BottomCenter
+//                ) {
+//                    Column(
+//                        modifier = Modifier.fillMaxHeight(),
+//                        verticalArrangement = Arrangement.Bottom
+//                    ) {
+//                        Text(text = total_amount.toString())
+//                        Spacer(modifier = Modifier.fillMaxHeight())
+//                    }
+//
+//                    Column(
+//                        modifier = Modifier.fillMaxHeight(),
+//                        verticalArrangement = Arrangement.Bottom
+//                    ) {
+//                        Text(text = (total_amount / 2).toString())
+//                        Spacer(modifier = Modifier.fillMaxHeight(0.5f))
+//                    }
+//                }
+//
+//                // Y-Axis Line
+//                Box(
+//                    modifier = Modifier
+//                        .fillMaxHeight()
+//                        .width(scaleLineWidth)
+//                        .background(Color.Black)
+//                )
+//
+//                // Graph and X-axis labels
+//                exerciseStatsList.groupBy { it.exerciseName }
+//                    .forEach { (exerciseName, statsForExercise) ->
+//                        val barValues =
+//                            statsForExercise.map { it.basketsMade.toFloat() / it.basketShots.toFloat() }
+//                        val adjustedBarValues = barValues.map { if (it == 1.0f) 0.93f else it }
+//
+//                        Column(
+//                            modifier = Modifier
+//                                .padding(start = barGraphWidth)
+//                        ) {
+//                            // Graph bars for each exerciseName
+//                            adjustedBarValues.forEach { barValue ->
+//                                Box(
+//                                    modifier = Modifier
+//                                        .clip(CircleShape)
+//                                        .width(barGraphWidth)
+//                                        .fillMaxHeight(barValue)
+//                                        .background(colorResource(id = R.color.teal_700))
+//                                )
+//                            }
+//
+//                            // X-axis label for each exerciseName
+//                            Text(
+//                                text = exerciseName,
+//                                textAlign = TextAlign.Center
+//                            )
+//                        }
+//                    }
+//            }
+//        }
+//    }
 
-        Column(
-            modifier = Modifier
-                .padding(50.dp)
-                .fillMaxSize(),
-            verticalArrangement = Arrangement.Top
-        ) {
-            Row(
-                modifier = Modifier
-                    .height(barGraphHeight)
-                    .fillMaxWidth(),
-                verticalAlignment = Alignment.Bottom,
-                horizontalArrangement = Arrangement.Start
-            ) {
-                // scale Y-Axis
-                Box(
-                    modifier = Modifier
-                        .fillMaxHeight()
-                        .width(scaleYAxisWidth),
-                    contentAlignment = Alignment.BottomCenter
-                ) {
-                    Column(
-                        modifier = Modifier.fillMaxHeight(),
-                        verticalArrangement = Arrangement.Bottom
-                    ) {
-                        Text(text = total_amount.toString())
-                        Spacer(modifier = Modifier.fillMaxHeight())
-                    }
-
-                    Column(
-                        modifier = Modifier.fillMaxHeight(),
-                        verticalArrangement = Arrangement.Bottom
-                    ) {
-                        Text(text = (total_amount / 2).toString())
-                        Spacer(modifier = Modifier.fillMaxHeight(0.5f))
-                    }
-                }
-
-                // Y-Axis Line
-                Box(
-                    modifier = Modifier
-                        .fillMaxHeight()
-                        .width(scaleLineWidth)
-                        .background(Color.Black)
-                )
-
-                // Graph and X-axis labels
-                exerciseStatsList.groupBy { it.exerciseName }
-                    .forEach { (exerciseName, statsForExercise) ->
-                        val barValues =
-                            statsForExercise.map { it.basketsMade.toFloat() / it.basketShots.toFloat() }
-                        val adjustedBarValues = barValues.map { if (it == 1.0f) 0.93f else it }
-
-                        Column(
-                            modifier = Modifier
-                                .padding(start = barGraphWidth)
-                        ) {
-                            // Graph bars for each exerciseName
-                            adjustedBarValues.forEach { barValue ->
-                                Box(
-                                    modifier = Modifier
-                                        .clip(CircleShape)
-                                        .width(barGraphWidth)
-                                        .fillMaxHeight(barValue)
-                                        .background(colorResource(id = R.color.teal_700))
-                                )
-                            }
-
-                            // X-axis label for each exerciseName
-                            Text(
-                                text = exerciseName,
-                                textAlign = TextAlign.Center
-                            )
-                        }
-                    }
-            }
-        }
     }
-}
