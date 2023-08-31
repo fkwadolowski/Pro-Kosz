@@ -6,6 +6,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -166,7 +167,8 @@ class SavedProgressActivity : ComponentActivity() {
         Column(
             modifier = Modifier
                 .padding(50.dp)
-                .fillMaxSize(),
+                .fillMaxSize()
+            .horizontalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.Top
         ) {
             Row(
@@ -213,6 +215,7 @@ class SavedProgressActivity : ComponentActivity() {
                 barValues.forEachIndexed { index, value ->
                     val adjustedValue = if (value == 1.0f) 0.93f else value
                     Column(
+
                         modifier = Modifier
                             .padding(start = barGraphWidth)
                     ) {
