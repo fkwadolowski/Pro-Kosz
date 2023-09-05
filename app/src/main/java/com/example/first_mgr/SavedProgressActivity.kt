@@ -2,12 +2,10 @@ package com.example.first_mgr
 
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -20,6 +18,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
@@ -41,6 +40,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
@@ -89,8 +89,20 @@ class SavedProgressActivity : ComponentActivity() {
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(16.dp)
+
                 ) {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(16.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            text = "Średnia skuteczność danego dnia",
+                            textAlign = TextAlign.Center,
+                            fontSize = 18.sp
+                        )
+                    }
                     // Your third component's content goes here
                     if (allBarValues.isNotEmpty()) {
                         Log.d("CustomChart", "Creating chart for all days")
@@ -102,11 +114,35 @@ class SavedProgressActivity : ComponentActivity() {
                 Column(
                     modifier = Modifier.fillMaxSize().padding(16.dp)
                 ) {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(16.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            text = "rozkład różnorodności rzutów",
+                            textAlign = TextAlign.Center,
+                            fontSize = 18.sp
+                        )
+                    }
                     // Display exercise name distribution pie chart
                     ExerciseNameDistributionChart(
                         exerciseNameFrequencies, modifier = Modifier
                             .fillMaxWidth()
                             .aspectRatio(1f)
+                    )
+                }
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        text = "Historia treningów",
+                        textAlign = TextAlign.Center,
+                        fontSize = 18.sp
                     )
                 }
                 // First part: Header row
@@ -162,9 +198,9 @@ class SavedProgressActivity : ComponentActivity() {
 
         Column(
             modifier = Modifier
-                .padding(50.dp)
+                .padding(16.dp)
                 .fillMaxSize()
-            .horizontalScroll(rememberScrollState()),
+                .horizontalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.Top
         ) {
             Row(
@@ -185,7 +221,7 @@ class SavedProgressActivity : ComponentActivity() {
                         modifier = Modifier.fillMaxHeight(),
                         verticalArrangement = Arrangement.Bottom
                     ) {
-                        Text(text = total_amount.toString()+"%")
+                        Text(text = total_amount.toString() + "%")
                         Spacer(modifier = Modifier.fillMaxHeight())
                     }
 
@@ -193,7 +229,7 @@ class SavedProgressActivity : ComponentActivity() {
                         modifier = Modifier.fillMaxHeight(),
                         verticalArrangement = Arrangement.Bottom
                     ) {
-                        Text(text = (total_amount / 2).toString()+"%")
+                        Text(text = (total_amount / 2).toString() + "%")
                         Spacer(modifier = Modifier.fillMaxHeight(0.5f))
                     }
 
@@ -229,10 +265,6 @@ class SavedProgressActivity : ComponentActivity() {
                                 .width(barGraphWidth)
                                 .fillMaxHeight(adjustedValue)
                                 .background(colorResource(id = R.color.teal_700))
-                                .clickable {
-                                    Toast.makeText(context, value.toString(), Toast.LENGTH_SHORT)
-                                        .show()
-                                }
                         )
 
                         // X-axis label using the date label from xAxisScale
@@ -245,6 +277,7 @@ class SavedProgressActivity : ComponentActivity() {
             }
         }
     }
+
     @Composable
     fun ExerciseNameDistributionChart(
         exerciseNameFrequencies: Map<String, Int>,
@@ -258,6 +291,7 @@ class SavedProgressActivity : ComponentActivity() {
         val data = counts.map { it.toFloat() }
         PieChartWithLegend(data, colors, legendLabels, modifier)
     }
+
     @Composable
     fun PieChartWithLegend(
         data: List<Float>,
@@ -265,33 +299,66 @@ class SavedProgressActivity : ComponentActivity() {
         legendLabels: List<String>, // New parameter for legend labels
         modifier: Modifier = Modifier
     ) {
-        Canvas(
+        Column(
             modifier = modifier
                 .fillMaxSize()
                 .padding(16.dp)
         ) {
-            val canvasSize = size.minDimension
-            val radius = canvasSize / 2
-            val centerX = size.width / 2
-            val centerY = size.height / 2
-            val total = data.sum()
-            var startAngle = 0f
+            Canvas(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .weight(1f)
+            ) {
+                val canvasSize = size.minDimension
+                val radius = canvasSize / 2
+                val centerX = size.width / 2
+                val centerY = size.height / 2
+                val total = data.sum()
+                var startAngle = 0f
 
-            data.forEachIndexed { index, value ->
-                val sweepAngle = value / total * 360f
-                val endAngle = startAngle + sweepAngle
+                data.forEachIndexed { index, value ->
+                    val sweepAngle = value / total * 360f
+                    val endAngle = startAngle + sweepAngle
 
-                drawArc(
-                    color = colors[index % colors.size],
-                    startAngle = startAngle,
-                    sweepAngle = sweepAngle,
-                    useCenter = true,
-                    topLeft = Offset(centerX - radius, centerY - radius),
-                    size = Size(radius * 2, radius * 2)
-                )
+                    drawArc(
+                        color = colors[index % colors.size],
+                        startAngle = startAngle,
+                        sweepAngle = sweepAngle,
+                        useCenter = true,
+                        topLeft = Offset(centerX - radius, centerY - radius),
+                        size = Size(radius * 2, radius * 2)
+                    )
 
-                startAngle = endAngle
+                    startAngle = endAngle
+                }
+            }
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 16.dp),
+                        horizontalArrangement = Arrangement.Center
+                    ) {
+                        for (i in legendLabels.indices) {
+                            val color = colors[i % colors.size]
+                            val label = legendLabels[i]
+
+                            // Colored square representing the legend
+                            Spacer(
+                                modifier = Modifier
+                                    .size(20.dp)
+                                    .background(color = color)
+                                    .padding(end = 8.dp)
+                            )
+
+                            // Legend label text
+                            Text(
+                                text = label,
+                                color = Color.Black,
+                                fontSize = 14.sp
+                            )
+                        }
+                    }
+                }
             }
         }
-    }
-}
+

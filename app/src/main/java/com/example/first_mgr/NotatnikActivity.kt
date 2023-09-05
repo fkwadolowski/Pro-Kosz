@@ -2,17 +2,20 @@ package com.example.first_mgr
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material3.Button
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -30,6 +33,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.first_mgr.Constants.preconfiguredNames
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -61,7 +65,6 @@ class NotatnikActivity : ComponentActivity() {
         }
     }
 
-
     @Composable
     fun BasketCounterScreen(exerciseStatsDao: ExerciseStatsDao) {
         var basketsMade by remember { mutableStateOf(0) }
@@ -71,50 +74,53 @@ class NotatnikActivity : ComponentActivity() {
         var selectedExerciseName by remember { mutableStateOf(preconfiguredNames[0]) }
         var selectedText by remember { mutableStateOf(preconfiguredNames[0]) }
 
-
+        Demo_ExposedDropdownMenuBox(selectedText) { selectedValue ->
+            selectedExerciseName = selectedValue
+        }
 
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(16.dp)
+                .padding(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Text(text = "Baskets Made: $basketsMade / $basketShots")
+            Text(
+                text = "$basketsMade / $basketShots",
+                modifier = Modifier.padding(bottom = 16.dp),
+                fontSize = 24.sp
+            )
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth() // Make the row take up the entire width
+                    .horizontalScroll(rememberScrollState()),
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Button(
+                    onClick = {
+                        basketsMade++
+                        basketShots++
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth() // Make the button as wide as possible horizontally
+                        .height(60.dp) // Set the height to make the button taller
+                ) {
+                    Text(text = "Made Basket", fontSize = 20.sp) // Adjust the font size
+                }
 
-            Button(onClick = {
-                basketsMade++
-                basketShots++
-            }) {
-                Text(text = "Made Basket")
+                Spacer(modifier = Modifier.width(8.dp))
+
+                Button(
+                    onClick = {
+                        basketShots++
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth() // Make the button as wide as possible horizontally
+                        .height(60.dp) // Set the height to make the button taller
+                ) {
+                    Text(text = "Missed Basket", fontSize = 20.sp) // Adjust the font size
+                }
             }
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            Button(onClick = {
-                basketShots++
-            }) {
-                Text(text = "Missed Basket")
-            }
-
-            Spacer(modifier = Modifier.height(16.dp))
-            Demo_ExposedDropdownMenuBox(selectedText) { selectedValue ->
-                selectedExerciseName = selectedValue
-            }
-            // Dropdown to select exercise name
-//            DropdownMenu(
-//                expanded = selectedExerciseName.isNotEmpty(),
-//                onDismissRequest = { /* Close the dropdown */ }
-//            ) {
-//                preconfiguredNames.forEach { name ->
-//                    DropdownMenuItem(onClick = {
-//                        onItemSelected(name)
-//                        expanded = false
-//                    }) {
-//                        Text(text = name)
-//                    }
-//                }
-//            }
 
             Spacer(modifier = Modifier.height(16.dp))
 
@@ -130,23 +136,67 @@ class NotatnikActivity : ComponentActivity() {
                 basketShots = 0
                 isSaveButtonClicked = false
             } else {
-                Button(onClick = {
-                    isSaveButtonClicked = true
-                }) {
-                    Text(text = "Save Statistics")
+                Button(
+                    onClick = {
+                        isSaveButtonClicked = true
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth() // Make the button as wide as possible horizontally
+                        .height(60.dp) // Set the height to make the button taller
+                ) {
+                    Text(text = "Save Statistics", fontSize = 20.sp) // Adjust the font size
                 }
             }
 
             Spacer(modifier = Modifier.height(16.dp))
-            ClearDatabase(exerciseStatsDao)
-            Spacer(modifier = Modifier.height(16.dp))
-            Button(onClick = {
-                // Start the new activity
-                val intent = Intent(this@NotatnikActivity, SavedProgressActivity::class.java)
-                startActivity(intent)
-            }) {
-                Text(text = "View Statistics")
+
+            Button(
+                onClick = {
+                    // Start the new activity
+                    val intent = Intent(this@NotatnikActivity, SavedProgressActivity::class.java)
+                    startActivity(intent)
+                },
+                modifier = Modifier
+                    .fillMaxWidth() // Make the button as wide as possible horizontally
+                    .height(60.dp) // Set the height to make the button taller
+            ) {
+                Text(text = "View Statistics", fontSize = 20.sp) // Adjust the font size
             }
+            // Create a Row for "Clear Last Entry" and "Reset Baskets" buttons
+            Spacer(modifier = Modifier.weight(1f))
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                // Clear Last Entry Button
+                Button(
+                    onClick = {
+                        CoroutineScope(Dispatchers.IO).launch {
+                            // Call the DAO function to delete the last entry
+                            exerciseStatsDao.deleteLastEntry()
+                        }
+                    },
+                    modifier = Modifier
+                        .height(60.dp) // Set the height to make the button taller
+                ) {
+                    Text(text = "Clear Last Entry", fontSize = 20.sp) // Adjust the font size
+                }
+
+                // Reset Baskets Button
+                Button(
+                    onClick = {
+                        basketsMade = 0
+                        basketShots = 0
+                    },
+                    modifier = Modifier
+                        .height(60.dp) // Set the height to make the button taller
+                ) {
+                    Text(text = "Reset Baskets", fontSize = 20.sp) // Adjust the font size
+                }
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
         }
     }
 
@@ -195,28 +245,6 @@ class NotatnikActivity : ComponentActivity() {
     }
 
 
-    @Composable
-    fun ClearDatabase(exerciseStatsDao: ExerciseStatsDao) {
-        val context = LocalContext.current
-
-        val clearDatabase = remember {
-            // This is a suspending function, so we need to use a `remember`
-            // function to suspend the execution of this Composable function
-            suspend {
-                exerciseStatsDao.clearAll()
-            }
-        }
-
-        Button(onClick = {
-            CoroutineScope(Dispatchers.IO).launch {
-                clearDatabase()
-                // Optionally, you can update any necessary state here
-            }
-        }) {
-            Text(text = "Clear Database")
-        }
-    }
-
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     fun Demo_ExposedDropdownMenuBox(
@@ -228,38 +256,50 @@ class NotatnikActivity : ComponentActivity() {
         val coffeeDrinks = arrayOf("dystans", "pół-dystans", "trumna", "dwutakty")
         var expanded by remember { mutableStateOf(false) }
 
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(32.dp)
-        ) {
-            ExposedDropdownMenuBox(
-                expanded = expanded,
-                onExpandedChange = {
-                    expanded = it
-                }
-            ) {
-                TextField(
-                    value = selectedText,
-                    onValueChange = {},
-                    readOnly = true,
-                    trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
-                    modifier = Modifier.menuAnchor()
-                )
+        // Define a mutable state for the selected item
+        var selectedItem by remember { mutableStateOf(selectedText) }
 
-                ExposedDropdownMenu(
+        // Center the ExposedDropdownMenuBox horizontally using a Row
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.Center
+        ) {
+            Box(
+                modifier = Modifier
+                    .padding(32.dp)
+            ) {
+                ExposedDropdownMenuBox(
                     expanded = expanded,
-                    onDismissRequest = { expanded = false }
+                    onExpandedChange = {
+                        expanded = it
+                    },
+                    modifier = Modifier.fillMaxWidth() // Make the ExposedDropdownMenuBox fill the width
                 ) {
-                    coffeeDrinks.forEach { item ->
-                        DropdownMenuItem(
-                            text = { Text(text = item) },
-                            onClick = {
-                                onSelectedTextChange(item) // Update the selected text
-                                expanded = false
-                                Toast.makeText(context, item, Toast.LENGTH_SHORT).show()
-                            }
-                        )
+                    TextField(
+                        value = selectedItem, // Use the selected item here
+                        onValueChange = {},
+                        readOnly = true,
+                        trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
+                        modifier = Modifier
+                            .menuAnchor()
+                            .fillMaxWidth() // Make the TextField fill the width
+                    )
+
+                    ExposedDropdownMenu(
+                        expanded = expanded,
+                        onDismissRequest = { expanded = false },
+                        modifier = Modifier.fillMaxWidth() // Make the ExposedDropdownMenu fill the width
+                    ) {
+                        coffeeDrinks.forEach { item ->
+                            DropdownMenuItem(
+                                text = { Text(text = item, modifier = Modifier.align(Alignment.CenterHorizontally)) },
+                                onClick = {
+                                    selectedItem = item // Update the selected item
+                                    onSelectedTextChange(item) // Notify the parent
+                                    expanded = false
+                                }
+                            )
+                        }
                     }
                 }
             }

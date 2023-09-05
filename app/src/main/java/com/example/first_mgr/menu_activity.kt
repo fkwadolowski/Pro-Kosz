@@ -4,16 +4,16 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.navigation.NavigationView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.drawerlayout.widget.DrawerLayout
-import androidx.appcompat.app.AppCompatActivity
 import com.example.first_mgr.databinding.ActivityMenuBinding
+import com.google.android.material.navigation.NavigationView
+import com.google.android.material.snackbar.Snackbar
 
 class menu_activity : AppCompatActivity() {
 
@@ -61,27 +61,36 @@ class menu_activity : AppCompatActivity() {
                 startActivity(intent)
                 true
             }
+
             R.id.nav_newsy -> {
                 // Start the TwitterActivity (or replace it with your Twitter view activity)
                 val intent = Intent(this, newsy_activity::class.java)
                 startActivity(intent)
                 true
             }
-//            R.id.nav_boiska -> {
-//                // Start the BoiskaActivity
-//                val intent = Intent(this, BoiskaActivity::class.java)
-//                startActivity(intent)
-//                true
-//            }
+
             R.id.nav_notatnik -> {
                 // Start the TwitterActivity (or replace it with your Twitter view activity)
                 val intent = Intent(this, NotatnikActivity::class.java)
                 startActivity(intent)
                 true
             }
-            else -> super.onOptionsItemSelected(item)
+
+            R.id.nav_gry -> {
+                // Start the GryActivityScreen activity
+                val intent = Intent(this, GryActivityScreen::class.java)
+                startActivity(intent)
+                true
+            }
+
+
+            else -> {
+                // Handle any other menu items here
+                super.onOptionsItemSelected(item)
+            }
         }
     }
+
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_menu)

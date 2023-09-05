@@ -66,8 +66,14 @@
             android:name=".SavedProgressActivity"
             android:exported="false"
             android:label="Notatnik saved"/>
-
-
+        <activity
+            android:name=".GryActivityScreen"
+            android:exported="false"
+            android:label="gry"/>
+        <activity
+            android:name=".ReflexGameFragment"
+            android:exported="false"
+            android:label="1gra"/>
     </application>
 
 </manifest>

@@ -27,8 +27,9 @@ abstract class ExerciseStatsDao {
 
     @Query(value = "SELECT * FROM exercise_statistics")
     abstract  fun getAllExerciseStats(): List<ExerciseStatistics>
-    @Query("DELETE FROM exercise_statistics")
-    abstract fun clearAll()
+
+    @Query("DELETE FROM exercise_statistics WHERE id = (SELECT MAX(id) FROM exercise_statistics)")
+    abstract fun deleteLastEntry()
 
 }
 

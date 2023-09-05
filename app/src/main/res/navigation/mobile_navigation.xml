@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_nav_home_to_nav_notatnik"
             app:destination="@id/nav_notatnik" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_gry"
+            app:destination="@id/nav_gry" />
     </fragment>
 
     <fragment
@@ -37,4 +40,17 @@
         android:name="com.example.first_mgr.NotatnikActivity"
         android:label="Notatnik"
         tools:layout="@layout/activity_notatnik" />
+    <fragment
+        android:id="@+id/nav_gry"
+        android:name="com.example.first_mgr.GryActivityScreen"
+        android:label="Gry Activity" >
+        <action
+            android:id="@+id/action_nav_gry_to_nav_reflex_game"
+            app:destination="@id/nav_reflex_game" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_reflex_game"
+        android:name="com.example.first_mgr.ReflexGameFragment"
+        android:label="Reflex Game" />
 </navigation>
+
