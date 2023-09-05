@@ -63,11 +63,12 @@ class ReflexGameFragment : Fragment() {
         var endTime by remember { mutableStateOf(0L) }
         var timeToClick by remember { mutableStateOf(0L) }
         var lowestTime by remember { mutableStateOf(Long.MAX_VALUE) }
-        var timer by remember { mutableStateOf(0L) }
-
+        var gameCount by remember { mutableStateOf(0) }
         val radioOptions = DifficultyLevel.values()
         val handler = remember { Handler(Looper.getMainLooper()) }
-
+        val basicColors = arrayOf(Color.Red, Color.Blue, Color.Green, Color.Yellow, Color.Magenta, Color.Cyan, Color.Gray)
+        var currentColor by remember { mutableStateOf(Color.Red) }
+        var randomDelay by remember { mutableStateOf(0L) }
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -86,6 +87,7 @@ class ReflexGameFragment : Fragment() {
                             .fillMaxSize()
                             .background(Color.Green)
                             .clickable {
+                                gameCount++
                                 endTime = System.nanoTime()
                                 timeToClick = (endTime - startTime)
                                 if (timeToClick < lowestTime) {
@@ -175,11 +177,21 @@ class ReflexGameFragment : Fragment() {
                 // Format seconds with leading zeros if needed
                 val formattedSeconds = String.format("%02d", seconds)
 
+                val lastSeconds = timeToClick / 1_000_000_000
+                val lastMillis = (timeToClick / 1_000_000) % 1_000
+                val lastFormattedSeconds = String.format("%02d", lastSeconds)
+
 // Display the lowest time in the desired format
-                Text(
-                    text = "Lowest Time: $formattedSeconds:$millis",
-                    style = TextStyle(fontSize = 18.sp)
-                )
+                if (gameCount >= 1) {
+                    Text(
+                        text = "Lowest Time: $formattedSeconds:$millis",
+                        style = TextStyle(fontSize = 18.sp)
+                    )
+                    Text(
+                        text = "Last Time: $lastFormattedSeconds:$lastMillis",
+                        style = TextStyle(fontSize = 18.sp)
+                    )
+                }
             }
         }
     }
