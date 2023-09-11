@@ -45,6 +45,20 @@ class GryActivityScreen : Fragment() {
                     navController.navigate(R.id.nav_reflex_game)
                 }
             )
+            GameCard(
+                title = "defense Game",
+                onClick = {
+                    // Navigate to the Reflex Game destination
+                    navController.navigate(R.id.nav_defense_game)
+                }
+            )
+            GameCard(
+                title = "dribling Game",
+                onClick = {
+                    // Navigate to the Reflex Game destination
+                    navController.navigate(R.id.nav_dribling_game)
+                }
+            )
             // Add more GameCard Composables for other mini-games
         }
     }

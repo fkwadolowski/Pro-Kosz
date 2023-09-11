@@ -74,6 +74,14 @@
             android:name=".ReflexGameFragment"
             android:exported="false"
             android:label="1gra"/>
+        <activity
+            android:name=".DefenseGameFragment"
+            android:exported="false"
+            android:label="2gra"/>
+        <activity
+            android:name=".DribblingGameFragment"
+            android:exported="false"
+            android:label="3gra"/>
     </application>
 
 </manifest>

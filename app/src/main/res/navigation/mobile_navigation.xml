@@ -47,10 +47,24 @@
         <action
             android:id="@+id/action_nav_gry_to_nav_reflex_game"
             app:destination="@id/nav_reflex_game" />
+        <action
+            android:id="@+id/action_nav_gry_to_nav_defense_game"
+            app:destination="@id/nav_defense_game" />
+        <action
+            android:id="@+id/action_nav_gry_to_nav_dribling_game"
+            app:destination="@id/nav_dribling_game" />
     </fragment>
     <fragment
         android:id="@+id/nav_reflex_game"
         android:name="com.example.first_mgr.ReflexGameFragment"
         android:label="Reflex Game" />
+    <fragment
+        android:id="@+id/nav_defense_game"
+        android:name="com.example.first_mgr.DefenseGameFragment"
+        android:label="Defense Game" />
+    <fragment
+        android:id="@+id/nav_dribling_game"
+        android:name="com.example.first_mgr.DribblingGameFragment"
+        android:label="Dribling Game" />
 </navigation>
 
