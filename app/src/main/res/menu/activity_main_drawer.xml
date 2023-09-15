@@ -32,5 +32,9 @@
             android:id="@+id/nav_ustawienia"
             android:icon="@drawable/menu_znak"
             android:title="Ustawienia" />
+        <item
+            android:id="@+id/nav_drawing"
+            android:icon="@drawable/menu_znak"
+            android:title="drawing tool" />
     </group>
 </menu>

@@ -82,8 +82,11 @@ class menu_activity : AppCompatActivity() {
                 startActivity(intent)
                 true
             }
-
-
+            R.id.nav_drawing -> {
+                val intent = Intent(this, DrawingFragment::class.java)
+                startActivity(intent)
+                true
+            }
             else -> {
                 // Handle any other menu items here
                 super.onOptionsItemSelected(item)

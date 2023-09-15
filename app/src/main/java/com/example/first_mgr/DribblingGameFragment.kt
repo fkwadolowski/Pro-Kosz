@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
@@ -35,6 +36,7 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -196,7 +198,8 @@ class DribblingGameFragment : Fragment() {
             Text(
                 text = "Current Exercise:",
                 modifier = Modifier.padding(bottom = 16.dp),
-                style = TextStyle(fontWeight = FontWeight.Bold) // Apply bold style
+                style = TextStyle(fontWeight = FontWeight.Bold, fontSize = 16.sp)
+            // Apply bold style
             )
             displayedDribbling.forEach { dribblingType ->
                 // Animate the displayed dribbling text
@@ -204,14 +207,19 @@ class DribblingGameFragment : Fragment() {
                     Text(
                         text = dribblingType,
                         modifier = Modifier
-                            .padding(8.dp)
+                            .fillMaxWidth() // Take up maximum available width
                             .background(color = Color(0xFF009688), shape = RoundedCornerShape(10.dp)) // Change background color to teal_700
-                            .padding(8.dp),
-                        style = TextStyle(fontWeight = FontWeight.Bold, color = Color.White) // Apply bold and white color
+                            .padding(8.dp)
+                            .wrapContentSize(Alignment.Center) // Center the text vertically
+                        ,
+                        style = TextStyle(
+                            fontWeight = FontWeight.Bold,
+                            color = Color.White,
+                            fontSize = 30.sp // Increase the font size
+                        )
                     )
                 }
             }
         }
     }
-
 }
