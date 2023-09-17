@@ -1,8 +1,11 @@
 package com.example.first_mgr
 
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Canvas
 import android.graphics.Color
+import android.graphics.Matrix
 import android.graphics.Paint
 import android.graphics.Path
 import android.util.AttributeSet
@@ -13,11 +16,16 @@ class DrawingView(context: Context, attrs: AttributeSet?) : View(context, attrs)
 
     private var paint: Paint = Paint()
     private var path: Path = Path()
+    private var backgroundBitmap: Bitmap = BitmapFactory.decodeResource(
+        resources,
+        R.drawable.basketball_court_full
+    )
+    private var isHalfCourt = false
 
     init {
-        paint.color = Color.BLACK
+        paint.color = Color.GREEN
         paint.isAntiAlias = true
-        paint.strokeWidth = 5f
+        paint.strokeWidth = 10f
         paint.style = Paint.Style.STROKE
         paint.strokeJoin = Paint.Join.ROUND
         paint.strokeCap = Paint.Cap.ROUND
@@ -25,6 +33,27 @@ class DrawingView(context: Context, attrs: AttributeSet?) : View(context, attrs)
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
+
+        var centerX = 0f  // Adjust the initial value
+        var centerY = 0f
+
+        if (!isHalfCourt) {
+            centerX = (width - backgroundBitmap.width) / 2f
+            centerY = (height - backgroundBitmap.height) / 2f
+        }
+
+
+
+        // Apply scaling for half basketball court
+        if (isHalfCourt) {
+            val matrix = Matrix()
+            matrix.setScale(1.2f, 1.2f)
+            matrix.postTranslate(centerX, centerY)
+            canvas.drawBitmap(backgroundBitmap, matrix, null)
+        } else {
+            canvas.drawBitmap(backgroundBitmap, centerX, centerY, null)
+        }
+
         canvas.drawPath(path, paint)
     }
 
@@ -51,6 +80,22 @@ class DrawingView(context: Context, attrs: AttributeSet?) : View(context, attrs)
 
     fun clear() {
         path.reset()
+        invalidate()
+    }
+
+    fun changeBackground() {
+        if (isHalfCourt) {
+            backgroundBitmap = BitmapFactory.decodeResource(
+                resources,
+                R.drawable.basketball_court_full
+            )
+        } else {
+            backgroundBitmap = BitmapFactory.decodeResource(
+                resources,
+                R.drawable.basketball_court_half
+            )
+        }
+        isHalfCourt = !isHalfCourt
         invalidate()
     }
 }

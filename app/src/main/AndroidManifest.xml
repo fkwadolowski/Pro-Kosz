@@ -92,5 +92,9 @@
             android:name=".SavedPhotosFragment"
             android:exported="false"
             android:label="drawings saved"/>
+        <activity
+            android:name=".SettingsFragment"
+            android:exported="false"
+            android:label="Settings"/>
     </application>
 </manifest>
