@@ -1,10 +1,12 @@
 package com.example.first_mgr
 
 import android.content.Intent
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -13,7 +15,6 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.first_mgr.databinding.ActivityMenuBinding
 import com.google.android.material.navigation.NavigationView
-import com.google.android.material.snackbar.Snackbar
 
 class menu_activity : AppCompatActivity() {
 
@@ -27,11 +28,9 @@ class menu_activity : AppCompatActivity() {
         setContentView(binding.root)
 
         setSupportActionBar(binding.appBarMenu.toolbar)
+        supportActionBar?.setBackgroundDrawable(ColorDrawable(ContextCompat.getColor(this, R.color.teal_500)))
 
-        binding.appBarMenu.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
+
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navHome
         val navController = findNavController(R.id.nav_host_fragment_content_menu)

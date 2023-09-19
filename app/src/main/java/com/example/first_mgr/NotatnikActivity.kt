@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
@@ -31,6 +32,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -101,6 +103,7 @@ class NotatnikActivity : ComponentActivity() {
                         basketsMade++
                         basketShots++
                     },
+                    colors = ButtonDefaults.buttonColors(containerColor =Color(0xFF009688)),
                     modifier = Modifier
                         .fillMaxWidth() // Make the button as wide as possible horizontally
                         .height(60.dp) // Set the height to make the button taller
@@ -114,6 +117,7 @@ class NotatnikActivity : ComponentActivity() {
                     onClick = {
                         basketShots++
                     },
+                    colors = ButtonDefaults.buttonColors(containerColor =Color(0xFF009688)),
                     modifier = Modifier
                         .fillMaxWidth() // Make the button as wide as possible horizontally
                         .height(60.dp) // Set the height to make the button taller
@@ -140,6 +144,7 @@ class NotatnikActivity : ComponentActivity() {
                     onClick = {
                         isSaveButtonClicked = true
                     },
+                    colors = ButtonDefaults.buttonColors(containerColor =Color(0xFF009688)),
                     modifier = Modifier
                         .fillMaxWidth() // Make the button as wide as possible horizontally
                         .height(60.dp) // Set the height to make the button taller
@@ -156,6 +161,7 @@ class NotatnikActivity : ComponentActivity() {
                     val intent = Intent(this@NotatnikActivity, SavedProgressActivity::class.java)
                     startActivity(intent)
                 },
+                colors = ButtonDefaults.buttonColors(containerColor =Color(0xFF009688)),
                 modifier = Modifier
                     .fillMaxWidth() // Make the button as wide as possible horizontally
                     .height(60.dp) // Set the height to make the button taller
@@ -176,6 +182,7 @@ class NotatnikActivity : ComponentActivity() {
                             exerciseStatsDao.deleteLastEntry()
                         }
                     },
+                    colors = ButtonDefaults.buttonColors(containerColor =Color(0xFF009688)),
                     modifier = Modifier
                         .height(60.dp) // Set the height to make the button taller
                 ) {
@@ -188,6 +195,7 @@ class NotatnikActivity : ComponentActivity() {
                         basketsMade = 0
                         basketShots = 0
                     },
+                    colors = ButtonDefaults.buttonColors(containerColor =Color(0xFF009688)),
                     modifier = Modifier
                         .height(60.dp) // Set the height to make the button taller
                 ) {
@@ -252,8 +260,9 @@ class NotatnikActivity : ComponentActivity() {
         selectedText: String,
         onSelectedTextChange: (String) -> Unit
     ) {
+
         val context = LocalContext.current
-        val coffeeDrinks = arrayOf("dystans", "pół-dystans", "trumna", "dwutakty")
+        val Exercisetype = arrayOf("dystans", "pół-dystans", "trumna", "dwutakty")
         var expanded by remember { mutableStateOf(false) }
 
         // Define a mutable state for the selected item
@@ -276,6 +285,7 @@ class NotatnikActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxWidth() // Make the ExposedDropdownMenuBox fill the width
                 ) {
                     TextField(
+                        colors = ExposedDropdownMenuDefaults.textFieldColors(focusedIndicatorColor= Color(0xFF009688)),
                         value = selectedItem, // Use the selected item here
                         onValueChange = {},
                         readOnly = true,
@@ -290,7 +300,7 @@ class NotatnikActivity : ComponentActivity() {
                         onDismissRequest = { expanded = false },
                         modifier = Modifier.fillMaxWidth() // Make the ExposedDropdownMenu fill the width
                     ) {
-                        coffeeDrinks.forEach { item ->
+                        Exercisetype.forEach { item ->
                             DropdownMenuItem(
                                 text = { Text(text = item, modifier = Modifier.align(Alignment.CenterHorizontally)) },
                                 onClick = {

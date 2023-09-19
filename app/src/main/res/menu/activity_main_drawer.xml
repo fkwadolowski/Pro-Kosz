@@ -15,11 +15,6 @@
             android:title="Newsy"
             android:onClick="onOptionsItemSelected"/>
         <item
-            android:id="@+id/nav_boiska"
-            android:icon="@drawable/menu_znak"
-            android:title="Boiska"
-            android:onClick="onOptionsItemSelected"/>
-        <item
             android:id="@+id/nav_notatnik"
             android:icon="@drawable/menu_znak"
             android:title="Notatnik"
@@ -28,10 +23,6 @@
             android:id="@+id/nav_gry"
             android:icon="@drawable/menu_znak"
             android:title="Gry treningowe" />
-        <item
-            android:id="@+id/nav_settings"
-            android:icon="@drawable/menu_znak"
-            android:title="Settings" />
         <item
             android:id="@+id/nav_drawing"
             android:icon="@drawable/menu_znak"
