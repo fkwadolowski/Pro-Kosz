@@ -3,7 +3,6 @@ package com.example.first_mgr
 import android.app.AlertDialog
 import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
@@ -107,15 +106,9 @@ private fun getSavedDrawingFileNames(): List<String> {
 
         if (fileToDelete.exists()) {
             val deleted = fileToDelete.delete()
-            if (deleted) {
-                Log.d(TAG, "File deleted successfully: $fileName")
-            } else {
-                Log.d(TAG, "Failed to delete file: $fileName")
-            }
-        } else {
-            Log.d(TAG, "File does not exist: $fileName")
+
+            findNavController().navigate(R.id.savedPhotosFragment)
         }
-        findNavController().navigate(R.id.savedPhotosFragment)
     }
     private fun deleteAllDrawings() {
         val fileNames = getSavedDrawingFileNames()
@@ -126,14 +119,14 @@ private fun getSavedDrawingFileNames(): List<String> {
     }
     private fun showDeleteAllConfirmationDialog() {
         val builder = AlertDialog.Builder(requireContext())
-        builder.setTitle("Confirm Deletion")
-            .setMessage("Are you sure you want to delete all drawings?")
-            .setPositiveButton("Yes") { dialog, _ ->
+        builder.setTitle("Potwierdź usunięcie")
+            .setMessage("Czy jesteś pewny że chcesz usunąć wszystkie rysunki?")
+            .setPositiveButton("Tak") { dialog, _ ->
                 // User clicked Yes, delete all drawings
                 deleteAllDrawings()
                 dialog.dismiss()
             }
-            .setNegativeButton("No") { dialog, _ ->
+            .setNegativeButton("Nie") { dialog, _ ->
                 // User clicked No, do nothing
                 dialog.dismiss()
             }

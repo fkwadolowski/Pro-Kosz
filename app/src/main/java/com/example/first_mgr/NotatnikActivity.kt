@@ -108,7 +108,7 @@ class NotatnikActivity : ComponentActivity() {
                         .fillMaxWidth() // Make the button as wide as possible horizontally
                         .height(60.dp) // Set the height to make the button taller
                 ) {
-                    Text(text = "Made Basket", fontSize = 20.sp) // Adjust the font size
+                    Text(text = "Rzut Trafiony", fontSize = 20.sp) // Adjust the font size
                 }
 
                 Spacer(modifier = Modifier.width(8.dp))
@@ -122,7 +122,7 @@ class NotatnikActivity : ComponentActivity() {
                         .fillMaxWidth() // Make the button as wide as possible horizontally
                         .height(60.dp) // Set the height to make the button taller
                 ) {
-                    Text(text = "Missed Basket", fontSize = 20.sp) // Adjust the font size
+                    Text(text = "Rzut Chybiony", fontSize = 20.sp) // Adjust the font size
                 }
             }
 
@@ -144,12 +144,12 @@ class NotatnikActivity : ComponentActivity() {
                     onClick = {
                         isSaveButtonClicked = true
                     },
-                    colors = ButtonDefaults.buttonColors(containerColor =Color(0xFF009688)),
+                    colors = ButtonDefaults.buttonColors(containerColor =Color(0xFFc7b214)),
                     modifier = Modifier
                         .fillMaxWidth() // Make the button as wide as possible horizontally
                         .height(60.dp) // Set the height to make the button taller
                 ) {
-                    Text(text = "Save Statistics", fontSize = 20.sp) // Adjust the font size
+                    Text(text = "Zapisz Statystyki", fontSize = 20.sp) // Adjust the font size
                 }
             }
 
@@ -166,7 +166,7 @@ class NotatnikActivity : ComponentActivity() {
                     .fillMaxWidth() // Make the button as wide as possible horizontally
                     .height(60.dp) // Set the height to make the button taller
             ) {
-                Text(text = "View Statistics", fontSize = 20.sp) // Adjust the font size
+                Text(text = "Zobacz Statystyki", fontSize = 20.sp) // Adjust the font size
             }
             // Create a Row for "Clear Last Entry" and "Reset Baskets" buttons
             Spacer(modifier = Modifier.weight(1f))
@@ -182,11 +182,11 @@ class NotatnikActivity : ComponentActivity() {
                             exerciseStatsDao.deleteLastEntry()
                         }
                     },
-                    colors = ButtonDefaults.buttonColors(containerColor =Color(0xFF009688)),
+                    colors = ButtonDefaults.buttonColors(containerColor =Color(0xFFc7b214)),
                     modifier = Modifier
                         .height(60.dp) // Set the height to make the button taller
                 ) {
-                    Text(text = "Clear Last Entry", fontSize = 20.sp) // Adjust the font size
+                    Text(text = "Usuń ostatni wpis", fontSize = 19.sp) // Adjust the font size
                 }
 
                 // Reset Baskets Button
@@ -195,11 +195,11 @@ class NotatnikActivity : ComponentActivity() {
                         basketsMade = 0
                         basketShots = 0
                     },
-                    colors = ButtonDefaults.buttonColors(containerColor =Color(0xFF009688)),
+                    colors = ButtonDefaults.buttonColors(containerColor =Color(0xFFc7b214)),
                     modifier = Modifier
                         .height(60.dp) // Set the height to make the button taller
                 ) {
-                    Text(text = "Reset Baskets", fontSize = 20.sp) // Adjust the font size
+                    Text(text = "Zresetuj Kosze", fontSize = 19.sp) // Adjust the font size
                 }
             }
 

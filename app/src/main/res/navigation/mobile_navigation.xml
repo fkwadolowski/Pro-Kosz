@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/nav_home"
         android:name="com.example.first_mgr.ui.home.HomeFragment"
-        android:label="@string/menu_home"
+        android:label="Pro-Kosz"
         tools:layout="@layout/activity_menu" >
         <action
             android:id="@+id/action_nav_home_to_nav_treningi"
@@ -25,9 +25,6 @@
         <action
             android:id="@+id/action_nav_home_to_nav_drawing"
             app:destination="@id/nav_drawing" />
-        <action
-            android:id="@+id/action_nav_home_to_nav_settings"
-            app:destination="@id/nav_settings" />
     </fragment>
 
     <fragment
@@ -49,7 +46,7 @@
     <fragment
         android:id="@+id/nav_gry"
         android:name="com.example.first_mgr.GryActivityScreen"
-        android:label="Gry Activity" >
+        android:label="Gry Treningowe" >
         <action
             android:id="@+id/action_nav_gry_to_nav_reflex_game"
             app:destination="@id/nav_reflex_game" />
@@ -63,19 +60,19 @@
     <fragment
         android:id="@+id/nav_reflex_game"
         android:name="com.example.first_mgr.ReflexGameFragment"
-        android:label="Reflex Game" />
+        android:label="Gra refleks" />
     <fragment
         android:id="@+id/nav_defense_game"
         android:name="com.example.first_mgr.DefenseGameFragment"
-        android:label="Defense Game" />
+        android:label="Gra obronna" />
     <fragment
         android:id="@+id/nav_dribling_game"
         android:name="com.example.first_mgr.DribblingGameFragment"
-        android:label="Dribling Game" />
+        android:label="Gra w kozłowanie" />
     <fragment
         android:id="@+id/nav_drawing"
         android:name="com.example.first_mgr.DrawingFragment"
-        android:label="Drawing tool"
+        android:label="Narzędzie do rysowania"
         tools:layout="@layout/activity_drawing">
         <action
             android:id="@+id/action_drawingFragment_to_savedPhotosFragment"
@@ -84,11 +81,7 @@
     <fragment
         android:id="@+id/savedPhotosFragment"
         android:name="com.example.first_mgr.SavedPhotosFragment"
-        android:label="Saved Photos Fragment"
+        android:label="Zapisane rysunki"
         tools:layout="@layout/fragment_saved_photos"/>
-    <fragment
-        android:id="@+id/nav_settings"
-        android:name="com.example.first_mgr.SettingsFragment"
-        android:label="Settings Fragment" />
 </navigation>
 

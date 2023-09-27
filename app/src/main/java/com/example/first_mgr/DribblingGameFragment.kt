@@ -1,7 +1,13 @@
 package com.example.first_mgr
 
+import android.app.AlertDialog
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.compose.animation.AnimatedVisibility
@@ -18,10 +24,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CheckboxDefaults
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Slider
+import androidx.compose.material3.SliderDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -50,6 +57,7 @@ class DribblingGameFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setContent {
                 DribblingGameScreen()
+                setHasOptionsMenu(true)
             }
         }
     }
@@ -92,9 +100,6 @@ class DribblingGameFragment : Fragment() {
                         onDribblingTypeSelected = { selectedDribbling = it }
                     )
                 }
-
-                // Input for specifying the number of minutes
-                Text("Number of Minutes:")
                 Slider(
                     value = numberOfMinutes.toFloat(),
                     onValueChange = { newValue ->
@@ -104,12 +109,18 @@ class DribblingGameFragment : Fragment() {
                     steps = 59,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(20.dp)
+                        .padding(20.dp),
+                    colors = SliderDefaults.colors(
+                        thumbColor = Color(0xFF009688), // Set thumb color
+                        activeTrackColor = Color(0xFF009688), // Set active track color
+                        inactiveTrackColor = Color(0xFFBDBDBD) // Set inactive track color
+                    )
                 )
-                Text(text = "Selected Minutes: $numberOfMinutes")
+                Text(text = "Liczba minut: $numberOfMinutes")
 
                 // Button to start the game
                 Button(
+                    colors = ButtonDefaults.buttonColors(containerColor =Color(0xFFc7b214)),
                     onClick = {
                         scope.launch {
                             gameStarted = true
@@ -131,7 +142,7 @@ class DribblingGameFragment : Fragment() {
                         .padding(16.dp)
                         .fillMaxWidth()
                 ) {
-                    Text("Start Game")
+                    Text("Zacznij grę")
                 }
             } else {
                 // Display the selected dribbling types
@@ -175,7 +186,7 @@ class DribblingGameFragment : Fragment() {
                                     onDribblingTypeSelected(newSelected)
                                 },
                                 colors = CheckboxDefaults.colors(
-                                    checkedColor = MaterialTheme.colorScheme.primary
+                                    checkedColor = Color(0xFF009688)
                                 )
                             )
                             Text(text = dribblingType)
@@ -196,7 +207,7 @@ class DribblingGameFragment : Fragment() {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = "Current Exercise:",
+                text = "Wykonuj to ćwiczenie:",
                 modifier = Modifier.padding(bottom = 16.dp),
                 style = TextStyle(fontWeight = FontWeight.Bold, fontSize = 16.sp)
             // Apply bold style
@@ -208,7 +219,7 @@ class DribblingGameFragment : Fragment() {
                         text = dribblingType,
                         modifier = Modifier
                             .fillMaxWidth() // Take up maximum available width
-                            .background(color = Color(0xFF009688), shape = RoundedCornerShape(10.dp)) // Change background color to teal_700
+                            .background(color = Color(0xFFc7b214), shape = RoundedCornerShape(10.dp)) // Change background color to teal_700
                             .padding(8.dp)
                             .wrapContentSize(Alignment.Center) // Center the text vertically
                         ,
@@ -221,5 +232,35 @@ class DribblingGameFragment : Fragment() {
                 }
             }
         }
+    }    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        menu.clear()
+        inflater.inflate(R.menu.menu_drawing_game_info, menu)
+
+        Handler(Looper.getMainLooper()).post {
+            val menuItem = menu.findItem(R.id.menu_item_draw_info)
+            menuItem.setIcon(R.drawable.ic_information)
+        }
+
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menu_item_draw_info -> {
+                showInfoDialog()
+                return true
+            }
+            else -> return super.onOptionsItemSelected(item)
+        }
+    }
+    private fun showInfoDialog() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("Informacje")
+        builder.setMessage(" wybierz ćwiczenia, kótre umiesz wykonać i dostosuj czas trwania ćwiczenia a po ro rozpoczęciu wykonuj je w kolejności wyświetlania na ekranie")
+        builder.setPositiveButton("OK") { dialog, which ->
+            // Handle positive button click (if needed)
+        }
+
+        builder.show()
     }
 }

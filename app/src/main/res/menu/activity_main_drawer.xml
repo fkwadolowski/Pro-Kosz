@@ -26,6 +26,6 @@
         <item
             android:id="@+id/nav_drawing"
             android:icon="@drawable/menu_znak"
-            android:title="drawing tool" />
+            android:title="Narzędzie do rysowania" />
     </group>
 </menu>

@@ -9,6 +9,9 @@ import android.os.Bundle
 import android.text.InputType
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
@@ -27,6 +30,7 @@ class DrawingFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
         // Initialize shared preferences
         sharedPreferences = requireActivity().getPreferences(Context.MODE_PRIVATE)
 
@@ -74,14 +78,14 @@ class DrawingFragment : Fragment() {
 
     private fun saveDrawing(drawingView: DrawingView) {
         val builder = AlertDialog.Builder(requireContext())
-        builder.setTitle("Save Drawing")
+        builder.setTitle("Zapisz rysunek")
 
         val input = EditText(requireContext())
         input.inputType = InputType.TYPE_CLASS_TEXT
-        input.hint = "Enter drawing name"
+        input.hint = "Wpisz nazwę rysunku"
         builder.setView(input)
 
-        builder.setPositiveButton("Save") { dialog, which ->
+        builder.setPositiveButton("Zapisz") { dialog, which ->
             val drawingName = input.text.toString()
 
             // Define a regular expression to allow only letters, digits, underscores, and spaces
@@ -113,16 +117,16 @@ class DrawingFragment : Fragment() {
                     // Save the updated drawing count to shared preferences
                     sharedPreferences.edit().putInt(KEY_DRAWING_COUNT, drawingCount).apply()
 
-                    Toast.makeText(requireContext(), "Drawing saved as $fileName", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Rysunek zapisano jako: $fileName", Toast.LENGTH_SHORT).show()
                 } catch (e: IOException) {
                     e.printStackTrace()
                 }
             } else {
-                Toast.makeText(requireContext(), "Please enter a valid drawing name without special characters.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Wprowadź nazwę bez znaków specjalnych", Toast.LENGTH_SHORT).show()
             }
         }
 
-        builder.setNegativeButton("Cancel") { dialog, which ->
+        builder.setNegativeButton("Anuluj") { dialog, which ->
             dialog.cancel()
         }
 
@@ -151,5 +155,30 @@ class DrawingFragment : Fragment() {
         val directory = requireContext().filesDir
         val files = directory.list { _, name -> name.endsWith(".png") } // Filter for .png files
         return files?.toList() ?: emptyList()
+    }
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        menu.clear()
+        inflater.inflate(R.menu.menu_drawing_game_info, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menu_item_draw_info -> {
+                showInfoDialog()
+                return true
+            }
+            else -> return super.onOptionsItemSelected(item)
+        }
+    }
+    private fun showInfoDialog() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("Informacje")
+        builder.setMessage(" Narysuj zagrywkę i zapisz ją na później, guziki kolejno odpowiedzialne są za:\nczyszczenie ekranu\nzapisywanie obrazu\nmenu zapisanych obrazów\nzmiana wyglądu boiska")
+
+        builder.setPositiveButton("OK") { dialog, which ->
+            // Handle positive button click (if needed)
+        }
+
+        builder.show()
     }
 }

@@ -98,4 +98,5 @@ class menu_activity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_content_menu)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
+
 }

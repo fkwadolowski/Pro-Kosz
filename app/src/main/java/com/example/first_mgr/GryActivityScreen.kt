@@ -1,6 +1,10 @@
 package com.example.first_mgr
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.compose.foundation.clickable
@@ -29,6 +33,7 @@ class GryActivityScreen : Fragment() {
         return ComposeView(requireContext()).apply {
             setContent {
                 GryActivityScreenContent()
+                setHasOptionsMenu(true)
             }
         }
     }
@@ -39,21 +44,21 @@ class GryActivityScreen : Fragment() {
 
         Column {
             GameCard(
-                title = "Reflex Game",
+                title = "Gra na refleks",
                 onClick = {
                     // Navigate to the Reflex Game destination
                     navController.navigate(R.id.nav_reflex_game)
                 }
             )
             GameCard(
-                title = "defense Game",
+                title = "Gra obronna",
                 onClick = {
                     // Navigate to the Reflex Game destination
                     navController.navigate(R.id.nav_defense_game)
                 }
             )
             GameCard(
-                title = "dribling Game",
+                title = "Gra w kozłowanie",
                 onClick = {
                     // Navigate to the Reflex Game destination
                     navController.navigate(R.id.nav_dribling_game)
@@ -80,8 +85,34 @@ class GryActivityScreen : Fragment() {
             ) {
                 Text(text = title, style = TextStyle(fontSize = 18.sp))
                 Spacer(modifier = Modifier.height(8.dp))
-                Text(text = "Click to play", style = TextStyle(fontSize = 14.sp))
+                Text(text = "Naciśnij aby zagrać", style = TextStyle(fontSize = 14.sp))
             }
         }
     }
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        menu.clear()
+        inflater.inflate(R.menu.menu_drawing_game_info, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menu_item_draw_info -> {
+                showInfoDialog()
+                return true
+            }
+            else -> return super.onOptionsItemSelected(item)
+        }
+    }
+    private fun showInfoDialog() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("Informacje")
+        builder.setMessage(" Wybierz grę i zacznij trening używając wybranych możliwości")
+
+        builder.setPositiveButton("OK") { dialog, which ->
+            // Handle positive button click (if needed)
+        }
+
+        builder.show()
+    }
 }
+

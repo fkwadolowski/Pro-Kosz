@@ -13,4 +13,6 @@
 <color name="app_theme_light">#f6fbff</color>
 <color name="edit_text_border">#03A9F4</color>
 <color name="edit_text_background">#DCE6E6</color>
+    <color name="olive">#968800 </color> //0xFFc7b214
+    <color name="olice_black">#635a00 </color> //0xFFc7b214
 </resources>

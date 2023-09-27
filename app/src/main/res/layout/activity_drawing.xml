@@ -24,24 +24,29 @@
             android:id="@+id/btn_clear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Clear" />
+            android:text="Wyczyść"
+            android:backgroundTint="@color/teal_500"
+            />
 
         <Button
             android:id="@+id/btn_save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Save" />
+            android:text="Zapisz"
+            android:backgroundTint="@color/olive"/>
 
         <Button
             android:id="@+id/btn_saved"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Saved" />
+            android:text="Zapisane"
+            android:backgroundTint="@color/olive"/>
 
         <Button
             android:id="@+id/btn_change_background"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Full/half" />
+            android:text="Układ"
+            android:backgroundTint="@color/teal_500"/>
     </LinearLayout>
 </LinearLayout>

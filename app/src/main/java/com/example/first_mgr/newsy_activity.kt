@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.LinearLayout
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -42,7 +41,7 @@ class newsy_activity : AppCompatActivity() {
         spinnerTeam.adapter = adapterTeam
 
         // Set up the seasons from 1970 to 2022
-        val years = (1970..2022).toList()
+        val years = (1970..2023).toList()
         val adapterSeason = ArrayAdapter(this, android.R.layout.simple_spinner_item, years)
         adapterSeason.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerSeason.adapter = adapterSeason

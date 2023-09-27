@@ -1,10 +1,14 @@
 package com.example.first_mgr
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.compose.foundation.background
@@ -16,7 +20,9 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -43,6 +49,7 @@ class ReflexGameFragment : Fragment() {
     ): View? {
         return ComposeView(requireContext()).apply {
             setContent {
+                setHasOptionsMenu(true)
                 ReflexGameContent()
             }
         }
@@ -111,7 +118,7 @@ class ReflexGameFragment : Fragment() {
                         ) {
                             // Calculate the time taken to click after the screen turns green
                             Text(
-                                text = "Click to stop timer!",
+                                text = "kliknij aby zakończyć!",
                                 style = TextStyle(fontSize = 20.sp)
                             )
                         }
@@ -124,86 +131,17 @@ class ReflexGameFragment : Fragment() {
                         ) {
                             // Screen is red
                             Text(
-                                text = "Get ready to click!",
+                                text = "przyszykuj się do kliknięcia!",
                                 style = TextStyle(fontSize = 20.sp)
                             )
                         }
                     }
-//                    else if (selectedDifficulty == DifficultyLevel.HARD) {
-//                        if (greenScreenVisible) {
-//                            if (!middleScreensShown) {
-//                                // Generate a random number of middle screens (1 to 10)
-//                                val numMiddleScreens = (1..10).random()
-//                                middleScreensRemaining = numMiddleScreens
-//                                middleScreensShown = true
-//                            }
-//
-//                            if (middleScreensRemaining > 0) {
-//                                if (!middleScreenDisplayed) {
-//                                    // Display a random middle screen color for a random time (1 to 2 seconds)
-//                                    currentColor = basicColors.random()
-//                                    randomDelay = (1..2).random() * 1000L
-//                                    Box(
-//                                        modifier = Modifier
-//                                            .fillMaxSize()
-//                                            .background(currentColor)
-//                                    )
-//                                    middleScreenDisplayed = false
-//                                    // Schedule the next middle screen
-//                                    LaunchedEffect(Unit) {
-//                                        delay(randomDelay)
-//                                        middleScreenDisplayed = true
-//                                        middleScreensRemaining--
-//                                    }
-//                                }
-//                            } else {
-//                                // Display the green screen when all middle screens have been shown
-//                                Box(
-//                                    modifier = Modifier
-//                                        .fillMaxSize()
-//                                        .background(Color.Green)
-//                                        .clickable {
-//                                            gameCount++
-//                                            endTime = System.nanoTime()
-//                                            timeToClick = (endTime - startTime)
-//                                            if (timeToClick < lowestTime) {
-//                                                lowestTime = timeToClick
-//                                            }
-//                                            gameStarted = false
-//                                            greenScreenVisible = false
-//                                            middleScreensShown = false
-//                                            middleScreenDisplayed = false
-//                                        },
-//                                    contentAlignment = Alignment.Center
-//                                ) {
-//                                    // Calculate the time taken to click after the screen turns green
-//                                    Text(
-//                                        text = "Click to stop timer!",
-//                                        style = TextStyle(fontSize = 20.sp)
-//                                    )
-//                                }
-//                            }
-//                        } else {
-//                            Box(
-//                                modifier = Modifier
-//                                    .fillMaxSize()
-//                                    .background(Color.Red),
-//                                contentAlignment = Alignment.Center
-//                            ) {
-//                                // Screen is red
-//                                Text(
-//                                    text = "Get ready to click!",
-//                                    style = TextStyle(fontSize = 20.sp)
-//                                )
-//                            }
-//                        }
-//                    }
-
                 } else {
 
                     Spacer(modifier = Modifier.height(16.dp))
                     // Add a button to start the game
                     Button(
+                        colors = ButtonDefaults.buttonColors(containerColor =Color(0xFFc7b214)),
                         onClick = {
                             gameStarted = true
                             greenScreenVisible = false
@@ -213,13 +151,14 @@ class ReflexGameFragment : Fragment() {
                             }, (1..5).random() * 1000L)
                         },
                         modifier = Modifier.align(Alignment.CenterHorizontally)
+                            .size(200.dp)
                     ) {
-                        Text(text = "Start Game")
+                        Text(text = "Zacznij grę ")
                     }
                     Spacer(modifier = Modifier.height(16.dp))
                     // Display the lowest time
                     LaunchedEffect(lowestTime) {
-                        Log.d("ReflexGameFragment", "lowestTime: $lowestTime")
+                        Log.d("ReflexGameFragment", "Najniższy czas: $lowestTime")
                         // This code will run after lowestTime is updated
                     }
 // Calculate seconds, milliseconds, and microseconds
@@ -232,11 +171,11 @@ class ReflexGameFragment : Fragment() {
 // Display the lowest time in the desired format
                     if (gameCount >= 1) {
                         Text(
-                            text = "Lowest Time: $formattedSeconds:$millis",
+                            text = "Najniższy czas: $formattedSeconds:$millis",
                             style = TextStyle(fontSize = 18.sp)
                         )
                         Text(
-                            text = "Last Time: $lastFormattedSeconds:$lastMillis",
+                            text = "Ostatni czas: $lastFormattedSeconds:$lastMillis",
                             style = TextStyle(fontSize = 18.sp)
                         )
                     }
@@ -249,4 +188,32 @@ class ReflexGameFragment : Fragment() {
         fun PreviewReflexGameContent() {
             ReflexGameContent()
         }
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        menu.clear()
+        inflater.inflate(R.menu.menu_drawing_game_info, menu)
+
+
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menu_item_draw_info -> {
+                showInfoDialog()
+                return true
+            }
+            else -> return super.onOptionsItemSelected(item)
+        }
+    }
+    private fun showInfoDialog() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("Informacje")
+        builder.setMessage(" naciśnij ekran kiedy zaświeci się na zielono by wygrać. Aby dodać trudności temu zadaniu skup się na innej czynności koszykarskiej aby rozwijać podzielność uwagi")
+
+        builder.setPositiveButton("OK") { dialog, which ->
+            // Handle positive button click (if needed)
+        }
+
+        builder.show()
+    }
 }
