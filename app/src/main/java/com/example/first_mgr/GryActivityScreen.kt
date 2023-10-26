@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 
+@Suppress("DEPRECATION")
 class GryActivityScreen : Fragment() {
 
     override fun onCreateView(
@@ -33,41 +34,23 @@ class GryActivityScreen : Fragment() {
         return ComposeView(requireContext()).apply {
             setContent {
                 GryActivityScreenContent()
-                setHasOptionsMenu(true)
-            }
-        }
-    }
-
+                setHasOptionsMenu(true) } } }
     @Composable
     fun GryActivityScreenContent() {
         val navController = findNavController()
-
         Column {
             GameCard(
                 title = "Gra na refleks",
                 onClick = {
-                    // Navigate to the Reflex Game destination
-                    navController.navigate(R.id.nav_reflex_game)
-                }
-            )
+                    navController.navigate(R.id.nav_reflex_game) })
             GameCard(
                 title = "Gra obronna",
                 onClick = {
-                    // Navigate to the Reflex Game destination
-                    navController.navigate(R.id.nav_defense_game)
-                }
-            )
+                    navController.navigate(R.id.nav_defense_game) })
             GameCard(
                 title = "Gra w kozłowanie",
                 onClick = {
-                    // Navigate to the Reflex Game destination
-                    navController.navigate(R.id.nav_dribling_game)
-                }
-            )
-            // Add more GameCard Composables for other mini-games
-        }
-    }
-
+                    navController.navigate(R.id.nav_dribling_game) }) } }
     @Composable
     fun GameCard(
         title: String,
@@ -77,7 +60,7 @@ class GryActivityScreen : Fragment() {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp)
-                .clickable(onClick = onClick), // Make the Card clickable
+                .clickable(onClick = onClick),
         ) {
             Column(
                 modifier = Modifier
@@ -85,15 +68,14 @@ class GryActivityScreen : Fragment() {
             ) {
                 Text(text = title, style = TextStyle(fontSize = 18.sp))
                 Spacer(modifier = Modifier.height(8.dp))
-                Text(text = "Naciśnij aby zagrać", style = TextStyle(fontSize = 14.sp))
-            }
-        }
-    }
+                Text(text = "Naciśnij aby zagrać", style = TextStyle(fontSize = 14.sp)) } } }
+    @Deprecated("Deprecated in Java")
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         menu.clear()
         inflater.inflate(R.menu.menu_drawing_game_info, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
+    @Deprecated("Deprecated in Java")
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menu_item_draw_info -> {
@@ -101,18 +83,12 @@ class GryActivityScreen : Fragment() {
                 return true
             }
             else -> return super.onOptionsItemSelected(item)
-        }
-    }
+        } }
     private fun showInfoDialog() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle("Informacje")
         builder.setMessage(" Wybierz grę i zacznij trening używając wybranych możliwości")
 
         builder.setPositiveButton("OK") { dialog, which ->
-            // Handle positive button click (if needed)
         }
-
-        builder.show()
-    }
-}
-
+        builder.show() } }

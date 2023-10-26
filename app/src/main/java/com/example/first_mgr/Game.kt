@@ -17,7 +17,6 @@ data class Game(
     val visitor_team: Team,
     val visitor_team_score: Int
 ) {
-    // Convert the date string to a Date object
     val formattedDate: Date?
         get() = try {
             SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault()).parse(date)
@@ -35,3 +34,5 @@ data class Team(
     val full_name: String,
     val name: String
 )
+
+

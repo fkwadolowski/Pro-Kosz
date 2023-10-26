@@ -37,7 +37,6 @@
                 android:layout_height="wrap_content"
                 tools:ignore="InvalidId">
 
-                <!-- Your exercise items will be dynamically added here -->
 
             </androidx.gridlayout.widget.GridLayout>
 

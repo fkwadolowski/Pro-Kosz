@@ -3,360 +3,350 @@
     "category": "Rozgrzewka",
     "exerciseName": "wymachy nóg w przód",
     "duration": "30 sek",
-    "opis": "Idąc do przodu staramy się wypchnąć wyprostowaną nogę przed siebie w stronę przeciwnej ręki."
+    "opis": "Idąc do przodu staramy się wypchnąć wyprostowaną nogę przed siebie w stronę przeciwnej ręki.",
+    "imageFileName": "zdjecie1"
   },
   {
     "category": "Rozgrzewka",
     "exerciseName": "wymachy nóg w bok/tył",
     "duration": "30 sek",
-    "opis": "Opierając się o ścianę wypychamy wyprostowaną nogę w lewą lub prawą stronę."
+    "opis": "Opierając się o ścianę wypychamy wyprostowaną nogę w lewą lub prawą stronę.",
+    "imageFileName": "zdjecie2"
   },
   {
     "category": "Rozgrzewka",
     "exerciseName": "wykrok w przód",
     "duration": "30 sek",
-    "opis": "Robimy krok do przodu i zostajemy w pozycji ze zgiętymi kolanami na kilka sekund. Następnie wybijamy się z wykrocznej nogi do pionu."
-  },
+    "opis": "Robimy krok do przodu i zostajemy w pozycji ze zgiętymi kolanami na kilka sekund. Następnie wybijamy się z wykrocznej nogi do pionu.",
+    "imageFileName": "zdjecie3"},
   {
     "category": "Rozgrzewka",
     "exerciseName": "wykroki w bok",
     "duration": "30 sek",
-    "opis": "Rozstawiamy nogi najszerzej jak możemy i staramy się przykucnąć na jednej ze stron utrzymując drugą nogę wyprostowaną."
-  },
+    "opis": "Rozstawiamy nogi najszerzej jak możemy i staramy się przykucnąć na jednej ze stron utrzymując drugą nogę wyprostowaną.",
+    "imageFileName": "zdjecie4" },
   {
     "category": "Rozgrzewka",
     "exerciseName": "przysiad z dłońmi pod stopami",
     "duration": "30 sek",
-    "opis": "Kucamy i podstawiamy dłonie pod stopy, po czym prostujemy nogi."
-  },
+    "opis": "Kucamy i podstawiamy dłonie pod stopy, po czym prostujemy nogi.",
+    "imageFileName": "zdjecie5"},
   {
     "category": "Rozgrzewka",
     "exerciseName": "krążenia ramionami",
     "duration": "30 sek",
-    "opis": "Wymachujemy wyprostowanymi rękami w przeciwne strony w synchronicznych ruchach."
-  },
+    "opis": "Wymachujemy wyprostowanymi rękami w przeciwne strony w synchronicznych ruchach.",
+    "imageFileName": "zdjecie6"},
   {
     "category": "Rozgrzewka",
     "exerciseName": "skip A/C",
     "duration": "30 sek",
-    "opis": "W truchcie próbujemy unieść kolana jak najwyżej / próbujemy dotknąć pośladków piętami."
-  },
+    "opis": "W truchcie próbujemy unieść kolana jak najwyżej / próbujemy dotknąć pośladków piętami.",
+    "imageFileName": "zdjecie7"},
   {
     "category": "Rozgrzewka",
     "exerciseName": "wyskoki z jedną nogą w górę",
     "duration": "30 sek",
-    "opis": "Wyskakujemy wypychając jedno kolano i przeciwną rękę do góry."
-  },
+    "opis": "Wyskakujemy wypychając jedno kolano i przeciwną rękę do góry.",
+    "imageFileName": "zdjecie8"},
   {
     "category": "Rozgrzewka",
     "exerciseName": "wyskoki z jedną nogą w bok",
     "duration": "30 sek",
-    "opis": "Skaczemy w bok i lądujemy na zewnętrznej nodze, następnie przysiad na jednej nodze i przeskakujemy na drugą."
-  },
+    "opis": "Skaczemy w bok i lądujemy na zewnętrznej nodze, następnie przysiad na jednej nodze i przeskakujemy na drugą.",
+    "imageFileName": "zdjecie9"},
   {
     "category": "Rozgrzewka",
     "exerciseName": "supermany",
     "duration": "30 sek",
-    "opis": "Leżąc na brzuchu układamy ręce, aby nasze ciało przypominało literę Y, następnie podnosimy klatkę piersiową i nogi i trzymamy kilka sekund."
-  },
+    "opis": "Leżąc na brzuchu układamy ręce, aby nasze ciało przypominało literę Y, następnie podnosimy klatkę piersiową i nogi i trzymamy kilka sekund.",
+    "imageFileName": "zdjecie10"},
   {
     "category": "Rozgrzewka",
     "exerciseName": "90/90",
     "duration": "30 sek",
-    "opis": "Siadamy ze zgiętymi kolanami i wykonujemy ruch rotacji obu kolan w jedną stronę próbując dotknąć kolanami ziemi. Powtarzamy ruch w drugą stronę."
-  },
+    "opis": "Siadamy ze zgiętymi kolanami i wykonujemy ruch rotacji obu kolan w jedną stronę próbując dotknąć kolanami ziemi. Powtarzamy ruch w drugą stronę.",
+    "imageFileName": "zdjecie11"},
   {
     "category": "Rozciąganie",
     "exerciseName": "bark przy ścianie",
     "duration": "30 sek",
-    "opis": "Stajemy barkiem do ściany, po czym prostujemy rękę za plecami."
-  },
+    "opis": "Stajemy barkiem do ściany, po czym prostujemy rękę za plecami.",
+    "imageFileName": "zdjecie12"},
   {
     "category": "Rozciąganie",
-    "exerciseName": "siad z wyporami nogami",
+    "exerciseName": "pozycja motyla",
     "duration": "30 sek",
-    "opis": "Siedząc tworzymy z nóg literę V i przyciągamy tułów w stronę jednej z nóg."
-  },
+    "opis": "Siedząc przystawiamy stopę do stopy, po czym łokciami lekko rozpychamy nogi w stronę ziemi.",
+    "imageFileName": "zdjecie13" },
   {
     "category": "Rozciąganie",
     "exerciseName": "HALF KNEEL QUAD/HIP FLEXOR",
     "duration": "30 sek",
-    "opis": "Uklęknij tak, aby jedno kolano było pod biodrem a drugie przed ciałem. Oba kolana zgięte pod kątem 90 stopni."
-  },
+    "opis": "Uklęknij tak, aby jedno kolano było pod biodrem a drugie przed ciałem. Oba kolana zgięte pod kątem 90 stopni.",
+    "imageFileName": "zdjecie14"},
   {
     "category": "Rozciąganie",
     "exerciseName": "HALF KNEEL ADDUCTOR STRETCH",
     "duration": "30 sek",
-    "opis": "Opieramy się na kolanach i przedramionach, po czym prostujemy do boku jedną z nóg."
-  },
+    "opis": "Opieramy się na kolanach i przedramionach, po czym prostujemy do boku jedną z nóg.",
+    "imageFileName": "zdjecie15" },
   {
     "category": "Rozciąganie",
     "exerciseName": "DOWNWARD DOG",
     "duration": "30 sek",
-    "opis": "Opierając się wyprostowanymi rękami o podłogę, unosimy biodra jak najwyżej, pamiętając żeby tułów był opuszczony, a głowa skierowana w stronę podłogi."
-  },
+    "opis": "Opierając się wyprostowanymi rękami o podłogę, unosimy biodra jak najwyżej, pamiętając żeby tułów był opuszczony, a głowa skierowana w stronę podłogi.",
+    "imageFileName": "zdjecie16"},
   {
     "category": "Rozciąganie",
     "exerciseName": "foka/dziecko",
     "duration": "30 sek",
-    "opis": "Leżąc na brzuchu układamy dłonie pod barki i prostujemy ręce bez podnoszenia bioder. Następnie przenosimy biodra w tył i siadamy na kolanach z głową w dół."
-  },
+    "opis": "Leżąc na brzuchu układamy dłonie pod barki i prostujemy ręce bez podnoszenia bioder. Następnie przenosimy biodra w tył i siadamy na kolanach z głową w dół.",
+    "imageFileName": "zdjecie17"},
   {
     "category": "Rozciąganie",
     "exerciseName": "oparcie o ścianę rękami",
     "duration": "30 sek",
-    "opis": "Stajemy w rozkroku przed ścianą i opieramy się o ścianę prostymi rękami, następnie staramy się plecami zejść jak najniżej."
-  },
+    "opis": "Stajemy w rozkroku przed ścianą i opieramy się o ścianę prostymi rękami, następnie staramy się plecami zejść jak najniżej.",
+    "imageFileName": "zdjecie18"},
   {
     "category": "Rozciąganie",
     "exerciseName": "achilles w pozycji do pompki",
     "duration": "30 sek",
-    "opis": "W pozycji do pompki zakładamy jedną nogę na drugą i unosimy biodra do góry."
-  },
+    "opis": "W pozycji do pompki zakładamy jedną nogę na drugą i unosimy biodra do góry.",
+    "imageFileName": "zdjecie19"},
   {
     "category": "Rozciąganie",
     "exerciseName": "łydka pod ścianą",
     "duration": "30 sek",
-    "opis": "Stajemy przed ścianą i ustawiamy stopę pod kątem do ściany, po czym zbliżamy biodra do ściany."
-  },
+    "opis": "Stajemy przed ścianą i ustawiamy stopę pod kątem do ściany, po czym zbliżamy biodra do ściany.",
+    "imageFileName": "zdjecie20"},
   {
     "category": "Rozciąganie",
     "exerciseName": "pozycja żaby",
     "duration": "30 sek",
-    "opis": "Siadamy na kolanach w jak największym rozkroku, po czym rękami dociskamy ciało do łydek."
-  },
+    "opis": "Siadamy na kolanach w jak największym rozkroku, po czym rękami dociskamy ciało do łydek.",
+    "imageFileName": "zdjecie21"},
   {
     "category": "Rzut",
     "exerciseName": "idealny rzut i krok w tył",
     "duration": "5-10 min",
-    "opis": "Wykonujemy kilka rzutów spod kosza, które zadowalają nas technicznie, po czym robimy krok do tyłu i powtarzamy."
-  },
+    "opis": "Wykonujemy kilka rzutów spod kosza, które zadowalają nas technicznie, po czym robimy krok do tyłu i powtarzamy.",
+    "imageFileName": "zdjecie22"},
   {
     "category": "Rzut",
     "exerciseName": "trumna",
     "duration": "5-10 min",
-    "opis": "Wybieramy pięć pozycji wokół kosza i po trafieniu z jednej pozycji przechodzimy na kolejną."
-  },
+    "opis": "Wybieramy pięć pozycji wokół kosza i po trafieniu z jednej pozycji przechodzimy na kolejną.",
+    "imageFileName": "zdjecie23"},
   {
     "category": "Rzut",
     "exerciseName": "osobiste",
     "duration": "5-10 min",
-    "opis": "TBD"
-  },
+    "opis": "Wykonujemy ososbiste zgodnie z ogólną techniką",
+    "imageFileName": "zdjecie24"},
   {
     "category": "Rzut",
     "exerciseName": "rzut w dany punkt",
     "duration": "1 minuta",
-    "opis": "Wybieramy konkretne miejsce na tablicy/ścianie i staramy się przy każdym rzucie trafić w ten sam punkt."
-  },
+    "opis": "Wybieramy konkretne miejsce na tablicy/ścianie i staramy się przy każdym rzucie trafić w ten sam punkt.",
+    "imageFileName": "zdjecie25"},
   {
     "category": "Rzut",
     "exerciseName": "rzut po naskoku",
     "duration": "10-15 min",
-    "opis": "Wyrzucamy piłkę przed siebie, po czym wykonujemy naskok i rzucamy do kosza."
-  },
+    "opis": "Wyrzucamy piłkę przed siebie, po czym wykonujemy naskok i rzucamy do kosza.",
+    "imageFileName": "zdjecie26"},
   {
     "category": "Rzut",
     "exerciseName": "rzut po koźle",
     "duration": "10-15 min",
-    "opis": "Ustawiamy się na naszej pozycji na boisku. Wykonujemy zwód i jak najszybciej rzut."
-  },
+    "opis": "Ustawiamy się na naszej pozycji na boisku. Wykonujemy zwód i jak najszybciej rzut.",
+    "imageFileName": "zdjecie27"},
   {
     "category": "Rzut",
     "exerciseName": "rzut z pod kosza(haki)",
     "duration": "5-10 min",
-    "opis": "Ustawiamy się pod koszem i na zmianę rzucamy z prawej i lewej ręki, starając się, aby piłka zawsze była w górze."
-  },
-  {
-    "category": "Rzut",
-    "exerciseName": "rzucanka z bieganiem",
-    "duration": "5-10 min",
-    "opis": "Ustawiamy pozycję startową i rzucamy z niej do kosza, po czym biegniemy zebrać piłkę i z tego miejsca rzucamy. W przypadku problemów z rzutem z danego miejsca wracamy na pozycję startową."
-  },
-  {
-    "category": "Rzut",
-    "exerciseName": "brak",
-    "duration": "brak",
-    "opis": "brak"
-  },
+    "opis": "Ustawiamy się pod koszem i na zmianę rzucamy z prawej i lewej ręki, starając się, aby piłka zawsze była w górze.",
+    "imageFileName": "zdjecie28"},
   {
     "category": "Rzut",
     "exerciseName": "każdy rzut na innym koszu",
     "duration": "5-10 min",
-    "opis": "Wykonujemy rzut na jeden z koszy, następnie zbieramy piłkę i biegniemy na drugi kosz zrobić to samo."
-  },
+    "opis": "Wykonujemy rzut na jeden z koszy, następnie zbieramy piłkę i biegniemy na drugi kosz zrobić to samo.",
+    "imageFileName": "zdjecie29"},
   {
     "category": "Kozłowanie",
     "exerciseName": "power dribble",
     "duration": "1 minuta",
-    "opis": "Kozłujemy jak najmocniej jedną ręką, powtarzamy dla drugiej."
-  },
+    "opis": "Kozłujemy jak najmocniej jedną ręką, powtarzamy dla drugiej.",
+    "imageFileName": "zdjecie30"},
   {
     "category": "Kozłowanie",
     "exerciseName": "crossover, 1-cr-1",
     "duration": "1 minuta",
-    "opis": "Wykonujemy jak najszerszy kozioł do drugiej ręki, wykonujemy jeden kozioł w miejscu i wracamy do pierwszej ręki. Trudniejsza wersja pomija kozioł w miejscu."
-  },
+    "opis": "Wykonujemy jak najszerszy kozioł do drugiej ręki, wykonujemy jeden kozioł w miejscu i wracamy do pierwszej ręki. Trudniejsza wersja pomija kozioł w miejscu.",
+    "imageFileName": "zdjecie31" },
   {
     "category": "Kozłowanie",
     "exerciseName": "pod jedną nogą",
     "duration": "1 minuta",
-    "opis": "Robimy wykrok jedną nogą i kozłujemy pod nią piłkę."
-  },
+    "opis": "Robimy wykrok jedną nogą i kozłujemy pod nią piłkę.",
+    "imageFileName": "zdjecie32"},
   {
     "category": "Kozłowanie",
     "exerciseName": "8 i revers",
     "duration": "1 minuta",
-    "opis": "Odbijając jak najniżej piłkę, manewrujemy nią wokół naszych nóg, tworząc figurę 8."
-  },
+    "opis": "Odbijając jak najniżej piłkę, manewrujemy nią wokół naszych nóg, tworząc figurę 8.",
+    "imageFileName": "zdjecie33"},
   {
     "category": "Kozłowanie",
     "exerciseName": "around the world i revers",
     "duration": "1 minuta",
-    "opis": "Ustawiamy się w rozkroku i robimy kozioł piłką, aby odbiła się pomiędzy nogami, następnie manewujemy piłką, aby powtórzyć to drugą ręką."
-  },
+    "opis": "Ustawiamy się w rozkroku i robimy kozioł piłką, aby odbiła się pomiędzy nogami, następnie manewujemy piłką, aby powtórzyć to drugą ręką.",
+    "imageFileName": "zdjecie34"},
   {
     "category": "Kozłowanie",
     "exerciseName": "za plecami",
     "duration": "1 minuta",
-    "opis": "Odbijamy piłkę za plecami z jednej ręki do drugiej."
-  },
+    "opis": "Odbijamy piłkę za plecami z jednej ręki do drugiej.",
+    "imageFileName": "zdjecie35"},
   {
     "category": "Kozłowanie",
     "exerciseName": "leg by leg",
     "duration": "1 minuta",
-    "opis": "Ustawiamy się z wykroku do przodu i odbijamy piłkę z wewnętrznej do zewnętrznej strony nogi, po czym przeskakujemy na drugą nogę i powtarzamy kozioł."
-  },
+    "opis": "Ustawiamy się z wykroku do przodu i odbijamy piłkę z wewnętrznej do zewnętrznej strony nogi, po czym przeskakujemy na drugą nogę i powtarzamy kozioł.",
+    "imageFileName": "zdjecie36"},
   {
     "category": "Kozłowanie",
     "exerciseName": "small bounce",
     "duration": "1 minuta",
-    "opis": "Odbijamy piłkę jedną ręką najniżej jak możemy. Powtarzamy dla drugiej ręki."
-  },
+    "opis": "Odbijamy piłkę jedną ręką najniżej jak możemy. Powtarzamy dla drugiej ręki.",
+    "imageFileName": "zdjecie37"},
   {
     "category": "Kozłowanie",
     "exerciseName": "chodzenie z kozłowaniem",
     "duration": "5-10 min",
-    "opis": "Poruszamy się po połowie wykonując różne typy kozłowania/zwodów, nie spuszczając wzroku z kosza."
-  },
+    "opis": "Poruszamy się po połowie wykonując różne typy kozłowania/zwodów, nie spuszczając wzroku z kosza.",
+    "imageFileName": "zdjecie38"},
   {
     "category": "Kozłowanie",
     "exerciseName": "zmiany kierunku w biegu",
     "duration": "5-10 min",
-    "opis": "Wykonujemy zwód i 3 szybkie kroki w stronę zwodu. Powtarzamy z różnymi zwodami."
-  },
+    "opis": "Wykonujemy zwód i 3 szybkie kroki w stronę zwodu. Powtarzamy z różnymi zwodami.",
+    "imageFileName": "zdjecie39"},
   {
     "category": "Zagrywki",
     "exerciseName": "zbiórka, dobiegnięcie i rzut",
     "duration": "10 min",
-    "opis": "Jedna osoba rzuca i zbiera po sobie, następnie podaje do partnera i dobiega do niego, imitując obrońce. Rzucający biegnie zebrać i powtarzamy."
-  },
+    "opis": "Jedna osoba rzuca i zbiera po sobie, następnie podaje do partnera i dobiega do niego, imitując obrońce. Rzucający biegnie zebrać i powtarzamy.",
+    "imageFileName": "zdjecie40"},
   {
     "category": "Zagrywki",
     "exerciseName": "po 10 rzutów",
     "duration": "10 min",
-    "opis": "Wybieramy pozycje rzutowe, z których rzucamy po 10 rzutów, nie zmieniając pozycji. Druga osoba zbiera i podaje piłkę."
-  },
+    "opis": "Wybieramy pozycje rzutowe, z których rzucamy po 10 rzutów, nie zmieniając pozycji. Druga osoba zbiera i podaje piłkę.",
+    "imageFileName": "zdjecie41"},
   {
     "category": "Zagrywki",
     "exerciseName": "odbijanie od tablicy po dwóch stronach",
     "duration": "5 min",
-    "opis": "Uderzamy piłkę od tablicy w taki sposób, aby trafiła na drugą stronę kosza."
-  },
+    "opis": "Uderzamy piłkę od tablicy w taki sposób, aby trafiła na drugą stronę kosza.",
+    "imageFileName": "zdjecie42"},
   {
     "category": "Zagrywki",
     "exerciseName": "pick and roll",
     "duration": "10 min",
-    "opis": "Jeden zawodnik ustawia zasłonę, a następnie obraca się dalszym ramieniem od kosza w stronę akcji i penetruje w stronę kosza."
-  },
+    "opis": "Jeden zawodnik ustawia zasłonę, a następnie obraca się dalszym ramieniem od kosza w stronę akcji i penetruje w stronę kosza.",
+    "imageFileName": "zdjecie43"},
   {
     "category": "Zagrywki",
     "exerciseName": "rozstawianie pachołków jako przeciwników",
     "duration": "10-15 min",
-    "opis": "Ustawiamy obiekty na miejscu potencjalnych obrońców (jeden na miejscu startu przy linii za trzy punkty, a drugi w trumnie), a następnie kreujemy akcję przechodzącą przez te punkty."
-  },
+    "opis": "Ustawiamy obiekty na miejscu potencjalnych obrońców (jeden na miejscu startu przy linii za trzy punkty, a drugi w trumnie), a następnie kreujemy akcję przechodzącą przez te punkty.",
+    "imageFileName": "zdjecie44"},
   {
     "category": "Zagrywki",
     "exerciseName": "wyskoki z różnych miejsc trumny",
     "duration": "10-15 min",
-    "opis": "Wyskakujemy z różnych miejsc trumny na końcu dwutaktu."
-  },
+    "opis": "Wyskakujemy z różnych miejsc trumny na końcu dwutaktu.",
+    "imageFileName": "zdjecie45"},
   {
     "category": "Zagrywki",
     "exerciseName": "różne rzuty z trumny",
     "duration": "10-15 min",
-    "opis": "Wykonujemy szybkie rzuty z terenu trumny, imitując sytuacje po zbiórce w ataku."
-  },
+    "opis": "Wykonujemy szybkie rzuty z terenu trumny, imitując sytuacje po zbiórce w ataku.",
+    "imageFileName": "zdjecie46"},
   {
     "category": "Zagrywki",
     "exerciseName": "1 na 1 z ograniczonym kozłem",
     "duration": "10-15 min",
-    "opis": "Gramy z ograniczeniem do 5 kozłów, i po każdym rzucie walczymy o zbiórkę."
-  },
+    "opis": "Gramy z ograniczeniem do 5 kozłów, i po każdym rzucie walczymy o zbiórkę.",
+    "imageFileName": "zdjecie47"},
   {
     "category": "Zagrywki",
     "exerciseName": "obrona do połowy i 1-1",
     "duration": "10-15 min",
-    "opis": "Zaczynamy na drugiej stronie boiska i do połowy jeden kozłuje, a drugi próbuje go kryć. Po minięciu linii połowy zaczynamy grę 1 na 1, nie zwalniając tempa."
-  },
+    "opis": "Zaczynamy na drugiej stronie boiska i do połowy jeden kozłuje, a drugi próbuje go kryć. Po minięciu linii połowy zaczynamy grę 1 na 1, nie zwalniając tempa.",
+    "imageFileName": "zdjecie48"},
   {
     "category": "Zagrywki",
     "exerciseName": "2 na 1",
     "duration": "10-15 min",
-    "opis": "Od połowy atakujemy dwójką na jednego obrońce, starając się jak najwięcej podawać."
-  },
+    "opis": "Od połowy atakujemy dwójką na jednego obrońce, starając się jak najwięcej podawać.",
+    "imageFileName": "zdjecie49"},
   {
     "category": "Podawanie",
     "exerciseName": "piłka tenisowa w jednej rece",
     "duration": "5-10 min",
-    "opis": "Podrzucamy piłkę tenisową w jednej ręce, kozłując drugą ręką."
-  },
+    "opis": "Podrzucamy piłkę tenisową w jednej ręce, kozłując drugą ręką.",
+    "imageFileName": "zdjecie50"},
   {
     "category": "Podawanie",
     "exerciseName": "przerzut piłki z ręki",
     "duration": "5-10 min",
-    "opis": "W trakcie kozła między rękami przerzucamy górą piłkę tenisową do drugiej ręki."
-  },
+    "opis": "W trakcie kozła między rękami przerzucamy górą piłkę tenisową do drugiej ręki.",
+    "imageFileName": "zdjecie51"},
   {
     "category": "Podawanie",
     "exerciseName": "tapowanie piłki nad głową",
     "duration": "5-10 min",
-    "opis": "Unosimy ręce do góry i odbijamy piłkę samymi palcami."
-  },
+    "opis": "Unosimy ręce do góry i odbijamy piłkę samymi palcami.",
+    "imageFileName": "zdjecie52"},
   {
     "category": "Podawanie",
     "exerciseName": "podania do ściany kozłem i prosto",
     "duration": "5-10 min",
-    "opis": "Podajemy do partnera/ściany, dbając, aby piłka trafiła w klatkę piersiową."
-  },
+    "opis": "Podajemy do partnera/ściany, dbając, aby piłka trafiła w klatkę piersiową.",
+    "imageFileName": "zdjecie53"},
   {
     "category": "Podawanie",
     "exerciseName": "podania jedną ręką kozłem i prosto",
     "duration": "5-10 min",
-    "opis": "Podajemy do partnera/ściany, dbając, aby piłka trafiła w klatkę piersiową."
-  },
+    "opis": "Podajemy do partnera/ściany, dbając, aby piłka trafiła w klatkę piersiową.",
+    "imageFileName": "zdjecie54"},
   {
     "category": "Podawanie",
     "exerciseName": "do siebie od tablicy z wyskoku",
     "duration": "5 min",
-    "opis": "Odbijamy piłkę od tablicy skacząc podczas każdego odbicia."
-  },
+    "opis": "Odbijamy piłkę od tablicy skacząc podczas każdego odbicia.",
+    "imageFileName": "zdjecie55"},
   {
     "category": "Podawanie",
     "exerciseName": "głupi jaś",
     "duration": "3-5 minut",
-    "opis": "Trzy osoby ustawiają się w trójkąt, a środkowa osoba podaje piłkę do jednej z bocznych osób, a ta odbija ją do drugiej bocznej osoby. Powtarzamy przez określony czas lub liczbę podań."
-  },
+    "opis": "Trzy osoby ustawiają się w trójkąt, a czwarta w środku próbuje przejąć piłkę podawaną przez 3 osoby. Powtarzamy przez określony czas lub liczbę podań.",
+    "imageFileName": "zdjecie56"},
   {
     "category": "Podawanie",
     "exerciseName": "do 3",
     "duration": "5 min",
-    "opis": "Podajemy piłkę do partnera trzymając się zasady maksymalnie 3 kozłów. Możemy podawać dowolnym podaniem, ale nie możemy przekroczyć 3 kozłów."
-  },
+    "opis": "Podajemy piłkę do partnera trzymając się zasady maksymalnie 3 kozłów. Możemy podawać dowolnym podaniem, ale nie możemy przekroczyć 3 kozłów.",
+    "imageFileName": "zdjecie57"},
   {
     "category": "Podawanie",
     "exerciseName": "podawanie na obwód",
     "duration": "5 min",
-    "opis": "Podajemy piłkę dookoła obwodu trzymając się zasady maksymalnie 3 kozłów. Możemy podawać dowolnym podaniem, ale nie możemy przekroczyć 3 kozłów."
-  }
+    "opis": "Podajemy piłkę dookoła obwodu trzymając się zasady maksymalnie 3 kozłów. Możemy podawać dowolnym podaniem, ale nie możemy przekroczyć 3 kozłów.",
+    "imageFileName": "zdjecie58"}
 ]

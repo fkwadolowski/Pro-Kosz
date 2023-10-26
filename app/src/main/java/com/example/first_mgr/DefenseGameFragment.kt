@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.example.first_mgr
 
 import android.app.AlertDialog
@@ -13,7 +15,6 @@ import android.view.ViewGroup
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
@@ -43,27 +44,21 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class DefenseGameFragment : Fragment() {
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         return ComposeView(requireContext()).apply {
             setContent {
                 setHasOptionsMenu(true)
                 DefenseGameContent()
-            }
-        }
-    }
-
+            } } }
     @Composable
     fun DefenseGameContent() {
         var arrowCount by remember { mutableStateOf(1) }
         var gameStarted by remember { mutableStateOf(false) }
         var gameRunning by remember { mutableStateOf(false) }
-        var gameDuration by remember { mutableStateOf(10) }
         val scope = rememberCoroutineScope()
-
         Column(
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.Top,
@@ -81,11 +76,10 @@ class DefenseGameFragment : Fragment() {
                         .fillMaxWidth()
                         .padding(20.dp),
                             colors = SliderDefaults.colors(
-                            thumbColor = Color(0xFF009688), // Set thumb color
-                    activeTrackColor = Color(0xFF009688), // Set active track color
-                    inactiveTrackColor = Color(0xFFBDBDBD) // Set inactive track color
-                )
-                )
+                            thumbColor = Color(0xFF009688),
+                    activeTrackColor = Color(0xFF009688),
+                    inactiveTrackColor = Color(0xFFBDBDBD)
+                ))
                 Text(text = "Liczba powtórzeń ćwiczenia: $arrowCount")
                 Button(
                     colors = ButtonDefaults.buttonColors(containerColor =Color(0xFFc7b214)),
@@ -100,8 +94,7 @@ class DefenseGameFragment : Fragment() {
                                 gameRunning = true
                             }
                             gameStarted = false
-                        }
-                    },
+                        } },
                     modifier = Modifier
                         .size(200.dp)
                 ) {
@@ -118,44 +111,29 @@ class DefenseGameFragment : Fragment() {
                 } else {
                     Text("Czekaj na kolejny znak", modifier = Modifier.padding(top = 8.dp))
                 }
-
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .background(color = Color.White)
-                        .padding(0.dp)
-                ) {
-                    // You can place other composable elements here
-                }
-            }
-        }
-    }
-
+ } } }
     @Composable
     fun DisplayArrow(modifier: Modifier = Modifier) {
         val painter = painterResource(id = R.drawable.arrow_left)
         val rotateDegrees = if ((0..1).random() == 0) 0f else 180f
-
         Image(
             painter = painter,
             contentDescription = "Arrow",
             modifier = modifier
                 .rotate(rotateDegrees)
                 .fillMaxHeight()
-        )
-    }
+        ) }
+    @Deprecated("Deprecated in Java")
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         menu.clear()
         inflater.inflate(R.menu.menu_drawing_game_info, menu)
-
         Handler(Looper.getMainLooper()).post {
             val menuItem = menu.findItem(R.id.menu_item_draw_info)
             menuItem.setIcon(R.drawable.ic_information)
         }
-
         super.onCreateOptionsMenu(menu, inflater)
     }
-
+    @Deprecated("Deprecated in Java")
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menu_item_draw_info -> {
@@ -163,18 +141,14 @@ class DefenseGameFragment : Fragment() {
                 return true
             }
             else -> return super.onOptionsItemSelected(item)
-        }
-    }
+        } }
     private fun showInfoDialog() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle("Informacje")
         builder.setMessage(" Wybierz liczbę powtórzeń strzałki, która losowo wyświetli się lewo/prawo. Przykład użycia: strzałka sygnalizuje gdzie użytkownik powinnen przesunąć się po zobaczeniu strzałki i wrócić zanim kolejna się pojawi  ")
+        builder.setPositiveButton("OK") { dialog, which -> }
+        builder.show() } }
 
-        builder.setPositiveButton("OK") { dialog, which ->
-            // Handle positive button click (if needed)
-        }
 
-        builder.show()
-    }
-}
+
 

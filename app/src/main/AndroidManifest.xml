@@ -43,23 +43,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".intro"
-            android:exported="false" />
-        <activity
             android:name=".print_cwiczenia_1"
             android:exported="true"/>
         <activity
             android:name=".newsy_activity"
             android:exported="false"
             android:label="Newsy Activity"/>
-
-<!--        <activity-->
-<!--            android:name=".BoiskaActivity"-->
-<!--            android:label="Boiska Activity"-->
-<!--            android:theme="@style/Theme.First_mgr" />-->
-<!--        <meta-data-->
-<!--            android:name="com.google.android.geo.API_KEY"-->
-<!--            android:value="${MAPS_API_KEY}" />-->
         <activity
             android:name=".NotatnikActivity"
             android:exported="false"

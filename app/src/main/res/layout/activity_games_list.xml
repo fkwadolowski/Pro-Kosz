@@ -4,8 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
-    <!-- Team and Year Spinners -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -13,34 +11,26 @@
         android:padding="8dp"
         android:background="@drawable/edit_text_background"
         android:layout_marginTop="8dp">
-
-        <!-- Team Spinner -->
         <Spinner
             android:id="@+id/spinnerTeam"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:entries="@array/team_array" />
-
-        <!-- Year Spinner -->
         <Spinner
             android:id="@+id/spinnerSeason"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:entries="@array/years_array" />
-
     </LinearLayout>
-
-    <!-- RecyclerView to display games -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewGames"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="8dp"
         android:background="@android:color/white" />
-
-    <!-- Include the item_game.xml layout below -->
     <include layout="@layout/item_game" />
-
 </LinearLayout>
+
+

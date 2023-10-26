@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.example.first_mgr
 
 import android.app.AlertDialog
@@ -53,15 +55,12 @@ class DribblingGameFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         return ComposeView(requireContext()).apply {
             setContent {
                 DribblingGameScreen()
                 setHasOptionsMenu(true)
-            }
-        }
-    }
-
+            } } }
     @Composable
     fun DribblingGameScreen() {
         var selectedDribbling by remember { mutableStateOf(setOf(
@@ -79,27 +78,23 @@ class DribblingGameFragment : Fragment() {
             "niski kozioł lewą ręką", "niski kozioł prawą ręką","pomiędzy nogami jednym kozłem od tyłu"
         )
         var displayedDribbling by remember { mutableStateOf(emptyList<String>()) }
-
         val scope = rememberCoroutineScope()
-
         Column(
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             if (!gameStarted) {
-                // Checkboxes for selecting the type of dribbling
                 Column(
                     modifier = Modifier.padding(16.dp),
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    Text("Select Dribbling Type:")
+                    Text("Wybierz umiane zwody:")
                     DribblingTypeRow(
                         dribblingTypes = dribblingList,
                         selectedDribbling = selectedDribbling,
                         onDribblingTypeSelected = { selectedDribbling = it }
-                    )
-                }
+                    ) }
                 Slider(
                     value = numberOfMinutes.toFloat(),
                     onValueChange = { newValue ->
@@ -111,48 +106,34 @@ class DribblingGameFragment : Fragment() {
                         .fillMaxWidth()
                         .padding(20.dp),
                     colors = SliderDefaults.colors(
-                        thumbColor = Color(0xFF009688), // Set thumb color
-                        activeTrackColor = Color(0xFF009688), // Set active track color
-                        inactiveTrackColor = Color(0xFFBDBDBD) // Set inactive track color
-                    )
-                )
+                        thumbColor = Color(0xFF009688),
+                        activeTrackColor = Color(0xFF009688),
+                        inactiveTrackColor = Color(0xFFBDBDBD)
+                    ))
                 Text(text = "Liczba minut: $numberOfMinutes")
-
-                // Button to start the game
                 Button(
                     colors = ButtonDefaults.buttonColors(containerColor =Color(0xFFc7b214)),
                     onClick = {
                         scope.launch {
                             gameStarted = true
                             val totalSeconds = numberOfMinutes * 60
-                            displayedDribbling = emptyList() // Clear the displayed dribbling list
+                            displayedDribbling = emptyList()
                             val selectedList = selectedDribbling.toList()
-
-                            // Randomly display each selected dribbling type for 30 seconds
                             for (second in 0 until totalSeconds step 30) {
                                 val randomDribbling = selectedList.random()
                                 displayedDribbling = listOf(randomDribbling)
                                 delay(30000L)
                             }
-
                             gameStarted = false
-                        }
-                    },
+                        } },
                     modifier = Modifier
                         .padding(16.dp)
                         .fillMaxWidth()
                 ) {
                     Text("Zacznij grę")
-                }
-            } else {
-                // Display the selected dribbling types
-
-                // Display the dribbling types in the middle of the screen
+                } } else {
                 DisplayedDribbling(displayedDribbling)
-            }
-        }
-    }
-
+            } } }
     @Composable
     fun DribblingTypeRow(
         dribblingTypes: List<String>,
@@ -170,7 +151,6 @@ class DribblingGameFragment : Fragment() {
                     for (j in i until minOf(i + 2, dribblingTypes.size)) {
                         val dribblingType = dribblingTypes[j]
                         val isSelected = selectedDribbling.contains(dribblingType)
-
                         Row(
                             verticalAlignment = Alignment.CenterVertically,
                             horizontalArrangement = Arrangement.spacedBy(8.dp)
@@ -187,16 +167,11 @@ class DribblingGameFragment : Fragment() {
                                 },
                                 colors = CheckboxDefaults.colors(
                                     checkedColor = Color(0xFF009688)
-                                )
-                            )
+                                ))
                             Text(text = dribblingType)
-                        }
-                    }
+                        } }
                     Spacer(modifier = Modifier.weight(1f, true))
-                }
-            }
-        }
-    }
+                } } } }
     @Composable
     fun DisplayedDribbling(displayedDribbling: List<String>) {
         Column(
@@ -204,63 +179,43 @@ class DribblingGameFragment : Fragment() {
                 .fillMaxSize()
                 .padding(16.dp),
             verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
+            horizontalAlignment = Alignment.CenterHorizontally) {
             Text(
                 text = "Wykonuj to ćwiczenie:",
                 modifier = Modifier.padding(bottom = 16.dp),
-                style = TextStyle(fontWeight = FontWeight.Bold, fontSize = 16.sp)
-            // Apply bold style
-            )
+                style = TextStyle(fontWeight = FontWeight.Bold, fontSize = 16.sp))
             displayedDribbling.forEach { dribblingType ->
-                // Animate the displayed dribbling text
                 AnimatedVisibility(visible = true, enter = fadeIn(), exit = fadeOut()) {
                     Text(
                         text = dribblingType,
                         modifier = Modifier
-                            .fillMaxWidth() // Take up maximum available width
-                            .background(color = Color(0xFFc7b214), shape = RoundedCornerShape(10.dp)) // Change background color to teal_700
+                            .fillMaxWidth()
+                            .background(color = Color(0xFFc7b214), shape = RoundedCornerShape(10.dp))
                             .padding(8.dp)
-                            .wrapContentSize(Alignment.Center) // Center the text vertically
-                        ,
+                            .wrapContentSize(Alignment.Center),
                         style = TextStyle(
                             fontWeight = FontWeight.Bold,
                             color = Color.White,
-                            fontSize = 30.sp // Increase the font size
-                        )
-                    )
-                }
-            }
-        }
-    }    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+                            fontSize = 30.sp) ) } } }
+    }    @Deprecated("Deprecated in Java")
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         menu.clear()
         inflater.inflate(R.menu.menu_drawing_game_info, menu)
-
         Handler(Looper.getMainLooper()).post {
             val menuItem = menu.findItem(R.id.menu_item_draw_info)
-            menuItem.setIcon(R.drawable.ic_information)
-        }
-
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
+            menuItem.setIcon(R.drawable.ic_information) }
+        super.onCreateOptionsMenu(menu, inflater) }
+    @Deprecated("Deprecated in Java")
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menu_item_draw_info -> {
                 showInfoDialog()
-                return true
-            }
-            else -> return super.onOptionsItemSelected(item)
-        }
-    }
+                return true }
+            else -> return super.onOptionsItemSelected(item) } }
     private fun showInfoDialog() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle("Informacje")
         builder.setMessage(" wybierz ćwiczenia, kótre umiesz wykonać i dostosuj czas trwania ćwiczenia a po ro rozpoczęciu wykonuj je w kolejności wyświetlania na ekranie")
-        builder.setPositiveButton("OK") { dialog, which ->
-            // Handle positive button click (if needed)
-        }
+        builder.setPositiveButton("OK") { dialog, which -> }
+        builder.show() } }
 
-        builder.show()
-    }
-}

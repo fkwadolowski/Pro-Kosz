@@ -19,3 +19,6 @@ object DatabaseManager {
         return appDatabase.exerciseStatsDao()
     }
 }
+
+
+

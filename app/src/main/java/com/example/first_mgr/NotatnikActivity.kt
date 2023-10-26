@@ -33,7 +33,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.first_mgr.Constants.preconfiguredNames
@@ -44,15 +43,11 @@ import kotlinx.coroutines.withContext
 
 
 class NotatnikActivity : ComponentActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         DatabaseManager.initialize(applicationContext)
-
         setContent {
             val exerciseStatsDao = DatabaseManager.getExerciseStatisticsDao()
-
-
             Column(
                 modifier = Modifier.fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally,
@@ -60,26 +55,17 @@ class NotatnikActivity : ComponentActivity() {
             ) {
                 BasketCounterScreen(exerciseStatsDao)
                 Spacer(modifier = Modifier.height(16.dp))
-                DisplayExerciseStats(exerciseStatsDao)
-
-
-            }
-        }
-    }
-
+            } } }
     @Composable
     fun BasketCounterScreen(exerciseStatsDao: ExerciseStatsDao) {
         var basketsMade by remember { mutableStateOf(0) }
         var basketShots by remember { mutableStateOf(0) }
         var isSaveButtonClicked by remember { mutableStateOf(false) }
-        var exerciseStatsList by remember { mutableStateOf(emptyList<ExerciseStatistics>()) }
         var selectedExerciseName by remember { mutableStateOf(preconfiguredNames[0]) }
         var selectedText by remember { mutableStateOf(preconfiguredNames[0]) }
-
         Demo_ExposedDropdownMenuBox(selectedText) { selectedValue ->
             selectedExerciseName = selectedValue
         }
-
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -91,10 +77,9 @@ class NotatnikActivity : ComponentActivity() {
                 modifier = Modifier.padding(bottom = 16.dp),
                 fontSize = 24.sp
             )
-
             Row(
                 modifier = Modifier
-                    .fillMaxWidth() // Make the row take up the entire width
+                    .fillMaxWidth()
                     .horizontalScroll(rememberScrollState()),
                 horizontalArrangement = Arrangement.Center
             ) {
@@ -105,29 +90,24 @@ class NotatnikActivity : ComponentActivity() {
                     },
                     colors = ButtonDefaults.buttonColors(containerColor =Color(0xFF009688)),
                     modifier = Modifier
-                        .fillMaxWidth() // Make the button as wide as possible horizontally
-                        .height(60.dp) // Set the height to make the button taller
+                        .fillMaxWidth()
+                        .height(60.dp)
                 ) {
-                    Text(text = "Rzut Trafiony", fontSize = 20.sp) // Adjust the font size
+                    Text(text = "Rzut Trafiony", fontSize = 20.sp)
                 }
-
                 Spacer(modifier = Modifier.width(8.dp))
-
                 Button(
                     onClick = {
                         basketShots++
                     },
                     colors = ButtonDefaults.buttonColors(containerColor =Color(0xFF009688)),
                     modifier = Modifier
-                        .fillMaxWidth() // Make the button as wide as possible horizontally
-                        .height(60.dp) // Set the height to make the button taller
+                        .fillMaxWidth()
+                        .height(60.dp)
                 ) {
-                    Text(text = "Rzut Chybiony", fontSize = 20.sp) // Adjust the font size
-                }
-            }
-
+                    Text(text = "Rzut Chybiony", fontSize = 20.sp)
+                } }
             Spacer(modifier = Modifier.height(16.dp))
-
             if (isSaveButtonClicked) {
                 val exerciseStats = ExerciseStatistics(
                     exerciseName = selectedExerciseName,
@@ -146,50 +126,42 @@ class NotatnikActivity : ComponentActivity() {
                     },
                     colors = ButtonDefaults.buttonColors(containerColor =Color(0xFFc7b214)),
                     modifier = Modifier
-                        .fillMaxWidth() // Make the button as wide as possible horizontally
-                        .height(60.dp) // Set the height to make the button taller
+                        .fillMaxWidth()
+                        .height(60.dp)
                 ) {
-                    Text(text = "Zapisz Statystyki", fontSize = 20.sp) // Adjust the font size
+                    Text(text = "Zapisz Statystyki", fontSize = 20.sp)
                 }
             }
-
             Spacer(modifier = Modifier.height(16.dp))
-
             Button(
                 onClick = {
-                    // Start the new activity
                     val intent = Intent(this@NotatnikActivity, SavedProgressActivity::class.java)
                     startActivity(intent)
                 },
                 colors = ButtonDefaults.buttonColors(containerColor =Color(0xFF009688)),
                 modifier = Modifier
-                    .fillMaxWidth() // Make the button as wide as possible horizontally
-                    .height(60.dp) // Set the height to make the button taller
+                    .fillMaxWidth()
+                    .height(60.dp)
             ) {
-                Text(text = "Zobacz Statystyki", fontSize = 20.sp) // Adjust the font size
+                Text(text = "Zobacz Statystyki", fontSize = 20.sp)
             }
-            // Create a Row for "Clear Last Entry" and "Reset Baskets" buttons
             Spacer(modifier = Modifier.weight(1f))
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                // Clear Last Entry Button
                 Button(
                     onClick = {
                         CoroutineScope(Dispatchers.IO).launch {
-                            // Call the DAO function to delete the last entry
                             exerciseStatsDao.deleteLastEntry()
                         }
                     },
                     colors = ButtonDefaults.buttonColors(containerColor =Color(0xFFc7b214)),
                     modifier = Modifier
-                        .height(60.dp) // Set the height to make the button taller
+                        .height(60.dp)
                 ) {
-                    Text(text = "Usuń ostatni wpis", fontSize = 19.sp) // Adjust the font size
+                    Text(text = "Usuń Ostatni Wpis", fontSize = 19.sp)
                 }
-
-                // Reset Baskets Button
                 Button(
                     onClick = {
                         basketsMade = 0
@@ -197,17 +169,14 @@ class NotatnikActivity : ComponentActivity() {
                     },
                     colors = ButtonDefaults.buttonColors(containerColor =Color(0xFFc7b214)),
                     modifier = Modifier
-                        .height(60.dp) // Set the height to make the button taller
+                        .height(60.dp)
                 ) {
-                    Text(text = "Zresetuj Kosze", fontSize = 19.sp) // Adjust the font size
+                    Text(text = "Zresetuj Kosze", fontSize = 19.sp)
                 }
             }
-
             Spacer(modifier = Modifier.height(16.dp))
-
         }
     }
-
     @Composable
     fun SaveExerciseStats(exerciseStatsDao: ExerciseStatsDao, exerciseStats: ExerciseStatistics) {
         LaunchedEffect(exerciseStats) {
@@ -216,59 +185,15 @@ class NotatnikActivity : ComponentActivity() {
             }
         }
     }
-
-    @Composable
-    fun DisplayExerciseStats(exerciseStatsDao: ExerciseStatsDao) {
-        var exerciseStatsList by remember { mutableStateOf(emptyList<ExerciseStatistics>()) }
-
-        // Fetch the exercise statistics from the database
-        LaunchedEffect(Unit) {
-            withContext(Dispatchers.IO) {
-                val stats = exerciseStatsDao.getAllExerciseStats()
-                exerciseStatsList = stats
-            }
-        }
-
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp)
-        ) {
-            Text(text = "Exercise Statistics:")
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            exerciseStatsList.forEach { stats ->
-                Text(
-                    text = "Exercise: ${stats.exerciseName}\n" +
-                            "Baskets Made: ${stats.basketsMade}\n" +
-                            "Basket Shots: ${stats.basketShots}\n" +
-                            "Timestamp: ${stats.timestamp}"
-                )
-
-                Spacer(modifier = Modifier.height(16.dp))
-            }
-
-        }
-    }
-
-
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     fun Demo_ExposedDropdownMenuBox(
-        // Define the variable `selectedText` in the scope of the function
         selectedText: String,
         onSelectedTextChange: (String) -> Unit
     ) {
-
-        val context = LocalContext.current
         val Exercisetype = arrayOf("dystans", "pół-dystans", "trumna", "dwutakty")
         var expanded by remember { mutableStateOf(false) }
-
-        // Define a mutable state for the selected item
         var selectedItem by remember { mutableStateOf(selectedText) }
-
-        // Center the ExposedDropdownMenuBox horizontally using a Row
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.Center
@@ -282,37 +207,31 @@ class NotatnikActivity : ComponentActivity() {
                     onExpandedChange = {
                         expanded = it
                     },
-                    modifier = Modifier.fillMaxWidth() // Make the ExposedDropdownMenuBox fill the width
+                    modifier = Modifier.fillMaxWidth()
                 ) {
                     TextField(
                         colors = ExposedDropdownMenuDefaults.textFieldColors(focusedIndicatorColor= Color(0xFF009688)),
-                        value = selectedItem, // Use the selected item here
+                        value = selectedItem,
                         onValueChange = {},
                         readOnly = true,
                         trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
                         modifier = Modifier
                             .menuAnchor()
-                            .fillMaxWidth() // Make the TextField fill the width
+                            .fillMaxWidth()
                     )
-
                     ExposedDropdownMenu(
                         expanded = expanded,
                         onDismissRequest = { expanded = false },
-                        modifier = Modifier.fillMaxWidth() // Make the ExposedDropdownMenu fill the width
+                        modifier = Modifier.fillMaxWidth()
                     ) {
                         Exercisetype.forEach { item ->
                             DropdownMenuItem(
                                 text = { Text(text = item, modifier = Modifier.align(Alignment.CenterHorizontally)) },
                                 onClick = {
-                                    selectedItem = item // Update the selected item
-                                    onSelectedTextChange(item) // Notify the parent
+                                    selectedItem = item
+                                    onSelectedTextChange(item)
                                     expanded = false
-                                }
-                            )
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
+                                } ) } } } } } } }
+
+
+

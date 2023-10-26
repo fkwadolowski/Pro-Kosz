@@ -2,12 +2,10 @@ package com.example.first_mgr
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.gridlayout.widget.GridLayout
 import android.widget.ImageView
 import android.widget.TextView
-import com.example.first_mgr.Exercise
-import com.example.first_mgr.R
+import androidx.appcompat.app.AppCompatActivity
+import androidx.gridlayout.widget.GridLayout
 import com.google.gson.Gson
 import java.io.BufferedReader
 import java.io.InputStream
@@ -47,8 +45,9 @@ class Cwiczenia_lista : AppCompatActivity() {
             // Set the exercise name
             exerciseNameTextView.text = exercise.exerciseName
 
-            // Set the exercise image (You can replace placeholder_image with actual image drawable resource)
-            exerciseImageView.setImageResource(R.drawable.login)
+            // Set the exercise image based on the imageFileName from JSON
+            val resourceId = resources.getIdentifier(exercise.imageFileName, "drawable", packageName)
+            exerciseImageView.setImageResource(resourceId)
 
             // Create GridLayout.LayoutParams for each exercise item to dynamically set the position in the grid
             val params = GridLayout.LayoutParams()
@@ -66,6 +65,7 @@ class Cwiczenia_lista : AppCompatActivity() {
                     putExtra("exerciseName", exercise.exerciseName)
                     putExtra("duration", exercise.duration)
                     putExtra("opis", exercise.opis)
+                    putExtra("imageFileName", exercise.imageFileName)
                 }
                 startActivity(intent)
             }

@@ -13,7 +13,6 @@ import android.view.MotionEvent
 import android.view.View
 
 class DrawingView(context: Context, attrs: AttributeSet?) : View(context, attrs) {
-
     private var paint: Paint = Paint()
     private var path: Path = Path()
     private var backgroundBitmap: Bitmap = BitmapFactory.decodeResource(
@@ -21,7 +20,6 @@ class DrawingView(context: Context, attrs: AttributeSet?) : View(context, attrs)
         R.drawable.basketball_court_full
     )
     private var isHalfCourt = false
-
     init {
         paint.color = Color.GREEN
         paint.isAntiAlias = true
@@ -30,21 +28,14 @@ class DrawingView(context: Context, attrs: AttributeSet?) : View(context, attrs)
         paint.strokeJoin = Paint.Join.ROUND
         paint.strokeCap = Paint.Cap.ROUND
     }
-
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-
-        var centerX = 0f  // Adjust the initial value
+        var centerX = 0f
         var centerY = 0f
-
         if (!isHalfCourt) {
             centerX = (width - backgroundBitmap.width) / 2f
             centerY = (height - backgroundBitmap.height) / 2f
         }
-
-
-
-        // Apply scaling for half basketball court
         if (isHalfCourt) {
             val matrix = Matrix()
             matrix.setScale(1.2f, 1.2f)
@@ -53,14 +44,11 @@ class DrawingView(context: Context, attrs: AttributeSet?) : View(context, attrs)
         } else {
             canvas.drawBitmap(backgroundBitmap, centerX, centerY, null)
         }
-
         canvas.drawPath(path, paint)
     }
-
     override fun onTouchEvent(event: MotionEvent): Boolean {
         val x = event.x
         val y = event.y
-
         when (event.action) {
             MotionEvent.ACTION_DOWN -> {
                 path.moveTo(x, y)
@@ -70,19 +58,14 @@ class DrawingView(context: Context, attrs: AttributeSet?) : View(context, attrs)
                 path.lineTo(x, y)
             }
             MotionEvent.ACTION_UP -> {
-                // Do something on finger release if needed
-            }
-        }
-
+            } }
         invalidate()
         return true
     }
-
     fun clear() {
         path.reset()
         invalidate()
     }
-
     fun changeBackground() {
         if (isHalfCourt) {
             backgroundBitmap = BitmapFactory.decodeResource(
@@ -93,9 +76,9 @@ class DrawingView(context: Context, attrs: AttributeSet?) : View(context, attrs)
             backgroundBitmap = BitmapFactory.decodeResource(
                 resources,
                 R.drawable.basketball_court_half
-            )
-        }
+            ) }
         isHalfCourt = !isHalfCourt
         invalidate()
-    }
-}
+    } }
+
+

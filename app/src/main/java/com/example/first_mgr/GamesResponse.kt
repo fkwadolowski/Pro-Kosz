@@ -12,3 +12,4 @@ data class Meta(
     val per_page: Int,
     val total_count: Int
 )
+

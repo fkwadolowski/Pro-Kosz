@@ -19,12 +19,10 @@ class GameAdapter(private val games: List<Game>) : RecyclerView.Adapter<GameAdap
         val imageViewHomeLogo: ImageView = itemView.findViewById(R.id.imageViewHomeTeamLogo)
         val imageViewVisitorLogo: ImageView = itemView.findViewById(R.id.imageViewVisitorTeamLogo)
     }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GameViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_game, parent, false)
         return GameViewHolder(itemView)
     }
-
     override fun onBindViewHolder(holder: GameViewHolder, position: Int) {
         val game = games[position]
         val year = game.date.substring(0, 10)
@@ -42,8 +40,8 @@ class GameAdapter(private val games: List<Game>) : RecyclerView.Adapter<GameAdap
         holder.imageViewHomeLogo.setImageResource(homeTeamLogoId)
         holder.imageViewVisitorLogo.setImageResource(visitorTeamLogoId)
     }
-
     override fun getItemCount(): Int {
         return games.size
     }
 }
+

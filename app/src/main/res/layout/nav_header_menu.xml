@@ -22,3 +22,4 @@
         app:srcCompat="@mipmap/pro_kosz_logo_foreground"
         android:background="@android:color/transparent"/>
 </LinearLayout>
+

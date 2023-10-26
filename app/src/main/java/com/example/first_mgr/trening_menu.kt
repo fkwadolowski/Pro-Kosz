@@ -1,9 +1,9 @@
 package com.example.first_mgr
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
 
 
 class trening_menu : AppCompatActivity() {
@@ -46,7 +46,6 @@ class trening_menu : AppCompatActivity() {
     }
 
     private fun navigateToExercises(category: String) {
-        // Start the ExercisesActivity and pass the selected category
         val intent = Intent(this, Cwiczenia_lista::class.java)
         intent.putExtra("category", category)
         startActivity(intent)
