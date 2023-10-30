@@ -11,7 +11,6 @@ class trening_menu : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_trening_menu)
 
-        // Find the buttons by their IDs
         val rozciaganieButton = findViewById<Button>(R.id.button)
         val rzutButton = findViewById<Button>(R.id.button4)
         val rozgrzewkaButton = findViewById<Button>(R.id.button5)
@@ -19,7 +18,6 @@ class trening_menu : AppCompatActivity() {
         val zagrywkiButton = findViewById<Button>(R.id.button3)
         val podawanieButton = findViewById<Button>(R.id.button2)
 
-        // Set click listeners for each button
         rozciaganieButton.setOnClickListener {
             navigateToExercises("Rozciąganie")
         }
@@ -51,3 +49,4 @@ class trening_menu : AppCompatActivity() {
         startActivity(intent)
     }
 }
+
