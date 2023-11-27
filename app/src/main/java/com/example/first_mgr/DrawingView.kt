@@ -79,6 +79,17 @@ class DrawingView(context: Context, attrs: AttributeSet?) : View(context, attrs)
             ) }
         isHalfCourt = !isHalfCourt
         invalidate()
-    } }
+    }
+    fun getPath(): Path {
+        return path
+    }
+
+    fun getBackgroundBitmap(): Bitmap {
+        return backgroundBitmap
+    }
+    fun isEmpty(): Boolean {
+        return path.isEmpty
+    }
+}
 
 
